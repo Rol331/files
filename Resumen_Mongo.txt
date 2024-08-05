@@ -1,0 +1,82 @@
+Resumen mongo db 
+
+
+use basedatos → crear base de datos o selecianar una 
+show collections; ---> listar todas las colleciones 
+
+show dbs → lista todas las base de datos
+Listar documentos (contenido de las tablas o colecciones) 
+db.documento.find().limit(5)  → lista los 5 primeros documento
+db.documento.find().sort({_id: -1}).skip(0).limit(5).pretty() → Mostrar los últimos 5 documentos de forma expandida(pretty)
+
+db.coleción.find({nombre:/ /})
+
+custom_id
+
+
+Listar datos 
+db.libros.find()---> mostar todos los registros 
+db.liros.fid(nombrecampo:dato) → filtro de campos (similar al where)
+
+
+db.libros.find({precio : 50, cantidad : 20 })
+category_product
+
+insertar datos 
+db.libros.insertOne(
+  {
+    codigo: 1,  
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: ['Planeta','Siglo XXI']
+  }
+
+
+BORRAR DATOS DE UNA COLECCIÓN 
+
+-----------------------
+use base1
+db.dropDatabase() ---> elimanr la base de datos
+----------------------------------------------------------
+Listado de operadores relacionales
+$eq - equal - igual
+$lt - low than - menor que
+$lte - low than equal - menor o igual que
+$gt - greater than - mayor que
+$gte - greater than equal - mayor o igual que
+$ne - not equal - distinto
+$in - in - dentro de
+$nin - not in - no dentro de
+
+Comando para limpiar pantall: cls
+
+db.nombreColeccion.count() ---> contar cantidad de documentos (mongo muestra mensaje de deprecación countDocuments)  
+
+db.export_tem_google.deleteMany({});  --> Limpiar data de una colleccion (dejarlo vacio ) 
+
+db.nombreColeccion.deleteMany({ estado: "inactivo" })  ---> con parametro 
+
+db.nombreColeccion.deleteOne({ nombre: "Juan" }) --> Elininar un solo documento que cumpla con el criterio (PENDIENTE PRUEBA E INVESTIGACIÓN ) 
+
+producto
+
+parent_category
+
+
+product_attribute
+
+
+61d7636c6657fd00309e4187    LAV3I6877U LAVADORA
+
+61d763406657fd00309e417e    LAVFOCQPI4 LAVADORAS
+
+
+
+false_information
+product_state
+test
+enable
+
+db.product.find({parent_category:"61d763406657fd00309e417e"},{product_name:1,store_id:1, enable:1,false_information:1, product_state:1, test:1,custom_id:1  }).pretty()
+
+~

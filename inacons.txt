@@ -1,0 +1,897 @@
+ 
+ 
+  ACCESOS 
+
+  Cuenta Correo:
+ ---------------
+  
+  Url:   https://mail.zoho.com/zm/#mail/folder/inbox
+  Usuario: rramos@inacons.com.pe
+  Contraseña: GI1PB0P2KK@a
+
+
+ Cuenta vitrix
+ --------------
+  Url: https://www.bitrix24.net/oauth/authorize/?user_lang=la&client_id=site.5463373ff044b5.06166321&redirect_uri=https%3A%2F%2Fwww.bitrix24.es%2Fauth%2F%3Fauth_service_id%3DBitrix24Net&scope=auth,client&response_type=code&mode=page&state=site_id%3Des%26backurl%3D%252Fauth%252F%253Fcheck_key%253Dc187c0386c614a00c4c0ad6f453fbfcd%26mode%3Dpage
+  Usuario: rramos@inacons.com.pe
+   Contraseña: GI1PB0P2KK@a
+
+ Cuenta de red
+---------------
+  ssid: UAP-INACONS  
+  password: "UAP-in@22"
+
+
+ Cuenta Aronet web
+-------------------
+ Url: https://appauranet.com/auraweb/#/ParametricGridSearchMasterDetails/brecursos
+ Clientes: INACONS
+ Empresa: INACONS
+ Usuario: OPE
+ Obra:INA-CAS
+ Contraseña:INA2024
+
+
+Diagrama de base de datos
+ -----------------------
+  Url: https://dbdiagram.io/d/66991c6e8b4bb5230eb5d486
+
+
+ Accesos hosting
+ ---------------------
+  inacons.com.pe/cpanel
+  ene06ind
+  3DWPIHH4S3IQ5@$abc
+
+
+ Accesos al diagrama de la base de datos 
+ -------------------------------------------
+
+https://dbdiagram.io/d/INACONS_DB-66991c6e8b4bb5230eb5d486
+
+https://dbdocs.io/rolandoramos2013/inacons(sin contraeña) 
+
+
+   Accesos a al documentacion de la base de datos 
+   -------------------------------------------------
+  url:https://dbdocs.io/rolandoramos2013/INACONS-DB
+  contraseña:C35d2jj@PHeAVpF 
+
+////////////////////////////// ACCESOS POR SHH /////////////////////////////
+
+
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/ene06ind/.ssh/id_rsa
+Your public key has been saved in /home/ene06ind/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:wxMvEfCBI7MoskorTgIISMeWud7PvW7Pk4c4LYBWENk 
+The key's randomart image is:
++---[RSA 1024]----+
+| ...o.=oo        |
+|o .=oooE o       |
+|o ...+..+        |
+|= ...  o +       |
+|+o. . o S .      |
+|o. . + . +       |
+|+.. . o o o o    |
+|=.     o *.= .   |
+|o.      oo=oo    |
++----[SHA256]-----+
+ 
+ .........................................
+
+
+
+ Generando par de claves RSA pública/privada. 
+ Ingrese frase de contraseña (vacía si no hay frase de contraseña): 
+ Ingrese la misma frase de contraseña nuevamente: 
+ Su identificación ha sido guardada en /home/ene06ind/.ssh/id_rsa 
+ Su clave pública ha sido guardada en /home/ene06ind/.ssh/id_rsa.pub 
+ La huella digital de la clave es: 
+ SHA256:wxMvEfCBI7MoskorTgIISMeWud7PvW7Pk4c4LYBWENk 
+ La imagen randomart de la clave es: 
+ +---[RSA 1024]----+ 
+ | ...o.=oo | 
+ |o .=oooE o | 
+ |o ...+..+ | 
+ |= ... o + | 
+ |+o. . o S . | 
+ |o. . + . + | 
+ |+.. . oooo | 
+ |=. o *.= . | 
+ |o. oo=oo | 
+ +----[SHA256]-----+
+
+
+ ////////////////////////////////////////////////////////////////////////////
+ 
+
+                  ANALISIS PROYECTOS 
+
+REQUERIMIENTOS , 
+
+  NECESITO LA MUESTRA DE LA DATA  DE LOS RECURSOS 
+  NECESITO ACCEOS AL AURANET PARA  VER LA FUNCIONALIDAD Y CAMPOS 
+  NECSITO QUE SE ME  AUTORIZE SI LA BASE DE DATOS ESTA SEPARADA
+  NECESITO DIFERENCIAR SI EL SISTEMA DEBE SER INSTALABLE O DESDE USARSE DESDE EL NAVEGADOR 
+
+DUDAS DE FUNCIONALIDAD 
+
+** Modulo de generación de recursos 
+ 1) ¿Un presupuesto debe solicitar recursos cuando este en estado terminado?
+ 2) ¿Qué es una partida ? 
+ 3) ¿Un presupuesto puede  solicitar un recurso a pesar que su stock es cero en el almacen ? 
+  
+   
+1.1 PROYECTO INACONS BASE DE DATOS (PRIMER BLOCK)
+
+    - Usuarios
+    - Recursos
+    - img_recursos
+    - presupuesto 
+    - presupuesto_version     
+    - almacen 
+    - clases 
+    - clasificación 
+
+  Presupuestos (desgloce data) 
+
+   
+     Titulo 
+     Subtitulo uno 
+     Subtitulo dos(en algunos presupuestos) 
+     Partida ( Nombre descriptivo de una acción, ejemplo  construcción de zapatas )  
+     recursos ( Son los materiales o personas que se usna en la acción , ejemplo de personal y materiales para la construcción de zapatas  )
+
+
+1.2 LISTADO DE ESTRUCUTURA DE  BASE DATOS (PRIMER BLOCK)
+
+
+  - RECURSOS 
+    - Codigo
+    - Descripción 
+    - Imagenes 
+    - Costo
+    - cod_ clases
+    - cod_clasificación
+    - Ubicación 
+
+    *Consumible --> Es el recurso que se usara en la obra y no regresara (ejemplo bolsa de cemento o material)
+    *Prestamos  --> Es el recuros que debe regresar al almacén (ejemplo una herramienta)
+    *Servicio   -->   
+
+    
+    
+  - IMAGENES RECURSOS 
+     -cod_recuros 
+     -imagen_1
+     -imagen_2
+     -imagen_3  
+
+  - CLASE_RECURSO
+     -codigo
+     -tipo_mombre 
+     
+ - CLASIFICACION_RECURSO    
+    - codigo
+    - clasificación_recurso
+
+  - PRESUPUESTOS  
+     - cotizaciones 
+     
+ - ALMACEN 
+  -codigo
+  -Tipo_almacen
+  -Ubicación 
+  -Nombre
+ 
+ - TIPO ALMACEN
+   - Fijo
+   - Temporal  
+
+
+////////////////////////////////////////////////////////////////////PROCESOS ///////////////////////////////////////////////
+
+      **********MODULO RECURSOS **************
+
+     el RECURSO.-  Es la herramienta, material y recuso humano  que debe mostrar este modulo como sus:  precio, imagenes, cantidad , ubicaciónn y existencia.
+     Los recursos estan jerarquizados en : consumible , prestamos , servicio 
+      
+     Estos recursos estan en un alamacen (fijo y otro que se habilita cerca de la obra ) 
+     Estos recursos se deben comprar en caso se agoten o un presupuesto lo requiera 
+     Estos recursos conforma una PARTIDA  
+     Las PARTIDAS conforma un PRESUPUESTO 
+     
+     Estos recursos 
+
+
+       **********MODULO PRESUPUESTO  **************
+
+
+       1) se sube el presupuesto para controla una licitacin ganada 
+
+       la data se importara del programa S10 o excel ( se recominda  crear uno modulo para prescindir de s10 o la importación de data por genera consumo de tiempo en el proceso)
+
+        Crear el PRESUPUESTO para generar la obra y realizar los requerimientos segun el presupuesto .
+
+        El presupuesto debe tener un original y versiones para comprar los costos en la duración del proyecto 
+
+
+    **********MODULO GENERACION DE RECURSOS (generaciond e compra o pedido)  **************
+    
+
+       Se solicitan los recursos segun el PRESUPUESTO 
+       Se solictan recuros que no esta en el PRESUPUESTO 
+       Los Recursos se deben comprar o ser pedidos del alamacen  
+
+
+       Cuando se solicita un recurso y se debe vincular a la partida (para ver el historial del requerimiento)
+       Se debe mostrar el costo de los RECURSOS  que conforman  el  requerimiento para tener noccion y referenciar el precio de la compra
+
+       Debe mostrar los costos del RECURSO Y Colocar un costo referencial para la ORDEN DE COMPRA 
+
+       Debe mostrar la ubicación del recurso  y so existe o agota se lista en la ORDEN DE COMPRA 
+
+       Debe tener niveles de aprobación 
+       
+       
+    **********MODULO CREACION DE OBRA   **************
+       
+        Con el presupuesto creado se crea la obra 
+        Se define los usuarios de aprobacion para ese obra 
+        Se define los almacenes
+
+        
+       
+    **********MODULO ORDEN  DE COMPRA (comprar el producto)  **************
+
+        NO SE PUEDE COMPRAR LO QUE NO ESTA REQUERIDO !! (preguntar si es requermiento o requerido)
+        jalar las  ORDEN DE COMPRA desde LA GENERACION DE RECURSOS 
+        se debe  actualizar EL RECURSO de una  PARTIDA   
+        Debe mostrar el precio referencial desde la GENERACION DE RECURSOS 
+        Debe generar compra con cotizaciones 
+        Debe mostrar el precio referencial de la GENERACION DE RECURSOS 
+        Debe mostrar si el RECURSO se recibió (preguntar quien debe recibirlo , responsable de obra?)
+        Debe mostrar el estado del registro de la factura
+        Niveles de aprobación 
+        Debe jalar los recursos de forma masiva en la compra ( se hiran comprando los recursos?) 
+        El PRECIO DEL RECURSO no debe sopresar al precio del RECURSO del PRESUPUESTO 
+        Mostrar si el RECURSO ya tiene una GENERACION DE RECURSOS (orden de compra)
+        Mostrar si el RECUROS esta asignado a un alamcen 
+        Mostrar si el RECURSO tiene una factura asignada 
+        Mostar  si el RECURSO tiene guia de recepcion del recepción
+        Mostrar si se cuenta con GUIA, FACTURA, GUIA DE TRANSPORTISTA  
+        Mostrar detalle de ingreso del producto 
+        Mostrar editar la opcion para que cada RECURSO sea cotizado por varios proveddores 
+        La compra de debe ser total o parcial mostrando que RECURSOS estan pendientes de compra
+
+
+  **********MODULO ALMACEN  **************      
+
+	KARDES =  INVENTARIO
+
+    vales de salida ??
+
+    tabla bodega 
+    
+      id | codigo   | nombre                | descripcion 
+     -----------------------------------------------------------------------------
+      1  | CU-MAC4  | Nobre e obra          | Son   Recursos nuevos  
+      2  | BDG-MAC4 | Bodega                |  Recursos usadas
+      3  | BTI-MAC4 | Bodega TI             |  Recurso tecnologico , laptops, etc 
+      4  | VEL-MAC4 | Equipos de combustion |   
+
+    
+
+    ///Salida de recurso.-/// cuando se entrega el recurso almacen  este debe mostrar  la partida a la que pertenece , solo deben mostrar recursos nuevos 
+                              para asignar ( supongo los que estan en stock cero tambien) 
+     
+    ///Devolucion de recurso a almacén ._ /// al seleccionar el recurso puede jalar la partida a la que se devuelve y a que afecta  a que se devuelva el gasto presupuestal
+
+    /// Salidas a descuento .- ///  se descuenta la perdida de un RECURSO al personal responsable 
+
+    /// Devolucion de descuento .- //  se lista los RECURSOS descontados por el personal 
+
+    /// Prestamo a persona._ ///  solo se debe considerar prestamo para bodega , VEL Y BTI  
+         
+    /// Devoluciones de prestamos a personas ._ /// listar los RECURSOS  prestados a personas
+
+    /// Transferencias  a otras obras ._ ///    Cuando se selecciona el recurso debe jalar automaticamente si el recuros se encuentra BODEGA , BTI , VEL O NUEVO 
+
+   /// Recepcion de transferencias ._ ///   solo debe aparecer los recursos que se transferio por obra que realizo la transferencia 
+   
+    /// Salia a bodega .-  ///   se debe realizar un procedimiento para registrar con vale de salida , la salida de un recurso no consumible , para que regrese a la bodega ,
+                                  mostrar a que partida pertenece, solo recursos nuevos 
+
+    /// Reingreso a bodega .- /// Este reingreso se debe registrar los recursoso no consumibles,nuevos y saliero con vale de salida para gasto presupuestal  
+                                  Permitir solo el reingreso a bodega VEL Y BTI 
+                                  Debe de aparecer los recursos que se dio  , salida con el procedimiento "Salida a Bodega"  
+
+
+      Informes 
+    ---------
+
+       Mostrar una comparacion entre ingresos y salidas pudiendo seleccionar la modalidades ingresos y modalidades de salidas 
+
+  **********MODULO REGISTRO COMPROBANTE   **************      
+
+       Tengo entendido sera el formato de exportacion para contasis 
+
+
+     **********MODULO REPORTES  **************         
+       indefinido 
+
+
+
+     
+       
+                
+////////////////////////////////////////////////////////////SCRIPT MODELO ENTIDAD RELACION (DIAGRAM.IO)  18/07/2024  ///////////////////////////////////////////////
+
+
+// INACONS ERP 
+// Definición esructura base de datos
+
+Table recursos{
+  id integer [primary key]
+  nombre varchar
+  descripcion text [note: 'detallar imagen']
+  fecha timestamp
+  stock integer
+  precio decimal
+  tipo_recurso_id inet6
+}
+
+Table  tipo_recuros {
+id integer [primary key]
+nombre varchar
+
+}
+
+
+Table imagen_recurso{
+  id integer [primary key]
+  recurso_id integer
+  imagen_1 varchar
+  imagen_2 varchar
+}
+
+Table precio_recurso{
+  id integer [primary key]
+  monto decimal
+  fecha datetime
+}
+
+Table presupuesto {
+  id integer [primary key]
+  recurso_id integer
+  titulo varchar
+  subtitulo varchar
+  licitacion_id integer
+}
+
+
+Table presupuesto_version {
+  id integer [primary key]
+  presupuesto_id integer
+}
+
+
+Table recurso_presupuesto {
+  id integer [primary key]
+  presupuesto_id integer
+  recurso_id integer
+
+}
+
+
+Table almacen{
+  id integer [primary key]
+  nombre varchar
+  ubicacion varchar
+  recurso_id integer
+  tipo bool
+  
+}
+
+
+Table licitacion {
+ id integer [primary key]
+ titulo varchar
+ estado bool
+}
+
+Table obra {
+ id integer [primary key]
+ titulo varchar
+}
+
+ref: imagen_recurso.recurso_id > recursos.id
+ref : recurso_presupuesto.recurso_id > recursos.id
+ref : recurso_presupuesto.presupuesto_id > presupuesto.id
+ref : almacen.recurso_id > recursos.id
+ref : presupuesto.id > licitacion.id
+ref : presupuesto_version.presupuesto_id > presupuesto.id
+ref : recursos.tipo_recurso_id > tipo_recuros.id
+
+
+
+
+    
+/////////////////////////////////////////////////////// END SCRIPT //////////////////////////////
+
+
+
+        Presupuesto 
+
+
+       Presupuesto  titulo 
+               
+       id | id_presupuest | id_titulo  
+        ------------------------------- 
+       1  |      1        |  1
+       2  |      1        |  2
+    
+     imprime 
+
+         1  presuesto  011-24
+
+
+     imprime (Pesupuesto titulos)
+         
+        select id, titulo from presupuesto_titulo
+             
+
+         where id_presupueto = 1;
+      
+     
+           1   OBRAAS PROVICIONALES Y  PRELIMINARES 
+           
+           2   OBRAAS PROVICIONALES Y  PRELIMINARES 
+       
+      imprime ( presupuesto subtitulos)
+
+
+
+       id | id_presupuesto |  subtitulo 
+      -----------------------------------      
+       1  |   1             |  1
+       2  |   1             |  2 
+
+
+       select id,
+
+
+    consultas iinner join para mostrar data 
+
+
+
+        select t.titulo from titulo_presupuesto as t  
+        inner join presupuesto_titulo as p on t.id = p.titulo_prespueto_id;
+
+
+
+         select subtitulo from subtitulo_presupuesto as s 
+         inner join presupuesto_subtitulo as p on s.id = p.subtitulo_presupuesto_id 
+         where p.presupuesto_id = 1 
+         and s.titulo_presupuesto_id = 1;
+
+
+
+
+
+/////////////////////////////////////////////// CORRECCIONES  (((((((((())))))))))
+
+       correjir oreden_compra_id: en cotización  --> correjir el nombre 
+       correjir nombre tabla CRUD para tipo_recuros  --> 
+INSERT INTO `obra_sub_almacen_encargado` (`id`, `obra_sub_almacen_id`, `usario_id`) VALUES --> agregar el id_obra para identificar los encargados de los sub almacenes 
+      
+
+
+           
+///////////////////////////////////////////////script para generara para automatizar (((((((((())))))))))
+
+
+     % tgpt "puedo hacer un script para para hacer un crud de una tabla de mis base de datos y despues usar este sript para que cree un crud para cada tabla con html , php y javascirpt"
+          
+Sí, puedes crear un script genérico para generar un CRUD (Crear, Leer, Actualizar, Eliminar) para cada tabla en tu base de datos utilizando HTML, PHP y JavaScript. Este script puede ser modificado para
+ adaptarse a diferentes tablas simplemente cambiando los nombres de las tablas y posiblemente algunos campos específicos.
+
+Aquí te muestro un ejemplo básico de cómo podrías estructurar este script. Este ejemplo asume que tienes una conexión a la base de datos configurada correctamente en PHP y que estás usando MySQL como
+ sistema de gestión de bases de datos.
+
+### Paso 1: Conexión a la Base de Datos
+
+Primero, asegúrate de tener una conexión a tu base de datos. Aquí hay un ejemplo de cómo podría verse esto:
+
+```php
+<?php
+$host = 'localhost';
+$db   = 'nombre_de_tu_base_de_datos';
+$user = 'usuario';
+$pass = 'contraseña';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+$pdo = new PDO($dsn, $user, $pass, $opt);
+?>
+```
+
+### Paso 2: Generar el CRUD
+
+Para simplificar, vamos a crear funciones generales para cada operación CRUD. Estas funciones tomarán como parámetros el nombre de la tabla y los datos necesarios para realizar la operación.
+
+#### Crear (Insert)
+
+```php
+function insert($table, $data)
+{
+    global $pdo;
+    $fields = implode(", ", array_keys($data));
+    $placeholders = ':' . implode(', :', array_keys($data));
+    $sql = "INSERT INTO $table ($fields) VALUES ($placeholders)";
+    $stmt = $pdo->prepare($sql);
+    foreach ($data as $key => $value) {
+        $stmt->bindValue(":$key", $value);
+    }
+    $stmt->execute();
+}
+```
+
+#### Leer (Select)
+
+```php
+function selectAll($table)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table";
+    return $pdo->query($sql)->fetchAll();
+}
+```
+
+#### Actualizar (Update)
+
+```php
+function update($table, $id, $data)
+{
+    global $pdo;
+    $set = '';
+    $params = [];
+    foreach ($data as $key => $value) {
+        $set .= "$key = :$key, ";
+        $params[":$key"] = $value;
+    }
+    // Remover la última coma
+    $set = rtrim($set, ' ');
+    $sql = "UPDATE $table SET $set WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    foreach ($params as $param => $value) {
+        $stmt->bindValue($param, $value);
+    }
+    $stmt->execute();
+}
+```
+
+#### Eliminar (Delete)
+
+```php
+function delete($table, $id)
+{
+    global $pdo;
+    $sql = "DELETE FROM $table WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+```
+
+### Paso 3: Integración con HTML y JavaScript
+
+Para integrar estas funciones con HTML y JavaScript, puedes crear formularios dinámicos basados en las columnas de tus tablas y utilizar AJAX para enviar los datos sin recargar la página. Esto requerirá
+ un conocimiento más profundo de cómo trabajar con AJAX y manipulación del DOM en JavaScript.
+
+Este es un punto de partida básico. Dependiendo de tus necesidades específicas, es posible que debas ajustar o expandir estas funciones para manejar casos más complejos, validar datos, manejar errores
+ de manera más efectiva, etc.
+
+rolf@MacBook-Air-de-rolf ~ % tgpt "si creo una archivo plantilla para un crud de una tabla en php y html con bostrap5 como puedo hacer que este archivo se replique para cada tabla y cree un sript para cada tabla"
+          
+Para crear un sistema CRUD (Crear, Leer, Actualizar, Eliminar) genérico en PHP y HTML con Bootstrap 5, puedes seguir los siguientes pasos. Este enfoque te permitirá reutilizar el mismo archivo de plant
+illa para múltiples tablas simplemente cambiando la consulta SQL y algunos nombres de variables según sea necesario.
+
+### Paso 1: Crear la Estructura Básica
+
+Primero, crea un archivo PHP que actuará tanto como servidor como plantilla. Este archivo incluirá la conexión a la base de datos, la lógica para interactuar con las tablas y la estructura HTML con
+ Bootstrap para mostrar los datos.
+
+```php
+<?php
+// Conexión a la base de datos
+$host = 'localhost';
+$db   = 'nombre_de_tu_base_de_datos';
+$user = 'usuario';
+$pass = 'contraseña';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+$pdo = new PDO($dsn, $user, $pass, $opt);
+
+// Aquí iría tu lógica para interactuar con la tabla específica
+?><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Genérico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Aquí irán tus formularios y listas -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+### Paso 2: Interactuar con la Tabla
+
+Para interactuar con diferentes tablas, necesitarás definir funciones que realicen operaciones CRUD específicas para cada tabla. Estas funciones pueden ser llamadas desde el archivo principal o desde
+ archivos separados que incluyas según sea necesario.
+
+Por ejemplo, una función para obtener todos los registros de una tabla podría verse así:
+
+```php
+function obtenerRegistros($tabla) {
+    global $pdo;
+    $sql = "SELECT * FROM $tabla";
+    return $pdo->query($sql)->fetchAll();
+}
+```
+
+### Paso 3: Mostrar Datos y Formularios
+
+Dentro del archivo HTML, puedes usar PHP para generar dinámicamente formularios y listas bándote en los datos obtenidos de la base de datos. Por ejemplo, para mostrar todos los registros de una tabla:
+
+```php
+<div class="table-responsive">
+    <table class="table -striped">
+        <thead>
+            <tr>
+                <?php foreach ($columnas  $columna): ?>
+                    <th><?php echo htmlspecialchars($columna); ?></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($registros as $registro): ?>
+                <tr>
+                    <?php foreach ($registro as $valor): ?>
+                        <td><?php echo htmlspecialchars($valor); ?></td>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+```
+
+### Paso 4: Formularios para Operaciones CRUD
+
+Para cada operación CRUD (crear, leer, actualizar, eliminar), necesitarás al menos un formulario. Puedes generar estos formularios dinámicamente usando PHP, asegurándote de cambiar los nombres de los
+ campos y las acciones según la operación que estés realizando.
+
+Este es un enfoque básico para crear un sistema CRUD genérico en PHP y HTML con Bootstrap 5. Dependiendo de tus necesidades específicas, es posible que debas ajustar la lógica de la base de datos y la
+ interfaz de usuario.
+
+
+
+
+////////////////////////////////// BITO SCRIPT ///////////////////////
+
+
+
+
+
+
+Si estás trabajando directamente con una base de datos sin un framework como Laravel, puedes crear un script en el lenguaje de programación que estés utilizando para insertar datos en las tablas de tu base de datos.
+
+Por ejemplo, si estás utilizando MySQL, puedes escribir consultas SQL para insertar datos directamente en las tablas. También puedes crear un script en un lenguaje como Python, PHP o Java para automatizar el proceso de inserción de datos en tu base de datos.
+
+Recuerda que al crear un seeder manualmente, debes tener en cuenta la lógica de las relaciones entre tablas para mantener la integridad de los datos. Asegúrate de insertar los datos en el orden adecuado para respetar las restricciones de clave externa.
+
+Si necesitas ayuda específica sobre cómo crear un seeder sin usar Laravel en un lenguaje de programación en particular, ¡estaré encantado de ayudarte!
+
+# To end input please press Ctrl+D. To quit please type quit and Ctrl+D.
+bito> bito por favor dame un codigo en php para hacer un seeder para toda mi base de datos con mysql
+
+
+bito response>
+Claro, puedo proporcionarte un ejemplo básico de cómo crear un seeder en PHP para rellenar tu base de datos MySQL con datos de prueba. En este ejemplo, asumiremos que ya tienes una conexión establecida a tu base de datos. Aquí tienes un ejemplo sencillo:
+
+```php
+<?php
+
+// Conexión a la base de datos
+$servername = "localhost";
+$username = "tu_usuario";
+$password = "tu_contraseña";
+$dbname = "nombre_de_tu_base_de_datos";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Query para insertar datos en una tabla
+$sql = "INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3) VALUES ('dato1', 'dato2', 'dato3')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Datos insertados correctamente";
+} else {
+    echo "Error al insertar datos: " . $conn->error;
+}
+
+// Cerrar la conexión
+$conn->close();
+
+?>
+```
+
+En este ejemplo, debes reemplazar "tu_usuario", "tu_contraseña", "nombre_de_tu_base_de_datos", "nombre_de_la_tabla", "columna1", "columna2", "columna3", 'dato1', 'dato2', 'dato3' con los valores correspondientes de tu base de datos y tablas.
+
+Puedes repetir este código para insertar datos en múltiples tablas y ajustarlo según las necesidades de tu base de datos.
+
+Recuerda que es importante tener en cuenta la lógica de las relaciones entre tablas al insertar datos para mantener la integridad de la base de datos.
+
+Si necesitas más ayuda o un ejemplo más específico, ¡estaré aquí para ayudarte!
+
+# To end input please press Ctrl+D. To quit please type quit and Ctrl+D.
+bito> bito el codigo anterior puedes adaptarlo para que rellena todas las tablas de mi base de datos de forma automatica
+
+bito response>
+Claro, puedo ayudarte a adaptar el código para que puedas rellenar todas las tablas de tu base de datos de forma automática. Para lograr esto, necesitarás obtener dinámicamente la lista de tablas de tu base de datos y luego insertar datos en cada una de ellas.
+
+Aquí tienes un ejemplo de cómo puedes hacerlo en PHP:
+
+```php
+<?php
+
+// Conexión a la base de datos
+$servername = "localhost";
+$username = "tu_usuario";
+$password = "tu_contraseña";
+$dbname = "nombre_de_tu_base_de_datos";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener la lista de tablas de la base de datos
+$tables_query = $conn->query("SHOW TABLES");
+$tables = [];
+while ($row = $tables_query->fetch_assoc()) {
+    $tables[] = $row['Tables_in_' . $dbname];
+}
+
+// Recorrer cada tabla y insertar datos de prueba
+foreach ($tables as $table) {
+    $result = $conn->query("SELECT * FROM $table LIMIT 1");
+    if ($result->num_rows > 0) {
+        $columns = [];
+        $values = [];
+        $row = $result->fetch_assoc();
+        foreach ($row as $column => $value) {
+            $columns[] = $column;
+            $values[] = "'$value'";
+        }
+        $columns_str = implode(", ", $columns);
+        $values_str = implode(", ", $values);
+        $insert_query = "INSERT INTO $table ($columns_str) VALUES ($values_str)";
+        if ($conn->query($insert_query) === TRUE) {
+            echo "Datos insertados en la tabla $table correctamente <br>";
+        } else {
+            echo "Error al insertar datos en la tabla $table: " . $conn->error . "<br>";
+        }
+    }
+}
+
+// Cerrar la conexión
+$conn->close();
+
+?>
+```
+
+Este código obtendrá la lista de tablas de tu base de datos, recorrerá cada tabla y generará una consulta de inserción de datos de prueba basada en la primera fila de cada tabla. Ten en cuenta que este es un ejemplo básico y puede necesitar ajustes según la estructura de tu base de datos.
+
+Recuerda que al ejecutar este código, se insertarán datos en todas las tablas de tu base de datos, por lo que es recomendable utilizarlo con precaución en un entorno de prueba.
+
+///////////////////////////////////////////////SCRIPT SSEEDER //////////////////////////
+
+
+
+ tgpt "hacer un script en phyton que adapte un script plantilla en php para que adapte este plantilla a todas las tablas de mi base de datos y cree un archivo por cada tabla"
+          
+Para adaptar un script PHP a todas las tablas de tu base de datos y crear un archivo por cada tabla usando Python, puedes seguir los siguientes pasos. Este proceso implica conect
+arse a tu base de datos, obtener una lista de todas las tablas, adaptar el script PHP para cada tabla y luego escribir el resultado en archivos separados.
+
+Primero, asegúrate de tener instalado pymysql o cualquier otro controlador de MySQL compatible con Python. Si no lo tienes, puedes instalarlo usando pip:
+
+```bash
+pip install pymysql
+```
+
+A continuación, te proporciono un esquema básico de cómo podría ser el script en Python. Este script asume que ya tienes un script PHP que deseas adaptar y que este script depende
+ d ciertos parámetros que pueden variar según la tabla (como nombres de columnas, etc.).
+
+```python
+import pymysql.cursors
+
+# Configuración de conexión a la base de datos
+db_config = {
+    'host': 'localhost',
+    'user': 'tu_usuario',
+    'password': 'tu_contraseña',
+    'database': 'nombre_de_tu_base_de_datos'
+}
+
+# Conexión a la base de datos
+connection = pymysql.connect(**db_config)
+
+try:
+    with connection.cursor() as cursor:
+        # Consulta pr obtener todos los nombres de las tablas
+        sql_get_tables = "SHOW TABLES"
+        cursor.execute(sql_get_tables)
+        tables = cursor.fetchall()
+        
+        for table in tables:
+            table_name = table[0]
+            
+            # Aquí adaptamos el script PHP para cada tabla
+            # Supongamos que el script PHP original se llama 'template.php' y está en el mismo directorio
+            template_path = f"{table_name}.php"
+            with open(template_path, 'r') as template_file:
+                template_content = template_file.read()
+                
+            # Adaptar el contenido del script PHP para la tabla actual
+            # Esto es solo un ejemplo; necesitarás adaptarlo según tus necesidades específicas
+            adapted_content = template_content.replace('NOMBRE_DE_TABLA', table_name)
+            
+            # Escribir el contenido adaptado en un nuevo archivo
+            output_path = f"adapted_{table_name}.php"
+            with open(output_path, 'w') as output_file:
+                output_file.write(adapted_content)
+                
+finally:
+    connection.close()
+
+print("Proceso completado.")
+```
+
+Este script es un punto de partida. Necesitarás ajustar la lógica de adaptación (adapted_content = ...) basándote en cómo tu script PHP original necesita ser modificado para
+ cada tabla. La función replace('NOMBRE_DE_TABLA', table_name) es solo un ejemplo simple; probablemente necesites una lógica más compleja si tus scripts PHP tienen múltiples
+ variables dinámicas o condiciones específicas de cada tabla.
+
+Recuerda reemplazar 'tu_usuario', 'tu_contraseña', y 'nombre_de_tu_base_de_datos' con tus credenciales reales de la base de datos. Además, asegúrate de tener permisos de
+ lectura/escritura en el directorio donde intentas guardar los archivos adaptados.
+
+

@@ -1,0 +1,876 @@
+3201.2 NORMALIZACIÓN DE BASE DATOS (3RA  FORMA NORMAL 23/07/2024 )
+
+   tabla clasificacion_recurso 
+
+   id | nombre  | descripcion 
+   -------------------
+    1 | Mo      |
+    2 | S. ro   | 
+    3 | Agreg   | 
+
+
+   tabla tipo_recurso
+
+   id | nombre |  descripcion 
+  -------------------------
+   1  | consumible | Recurso que sera parte de la obra (material)
+   2  | prestamo   | Recurso que debe regresar aun almacen (herramienta)
+   3  | servicio   |
+
+  
+   tabla recursos 
+
+   id | nombre    | descripcion  | fecha    | stock | precio_actual  | id_tipo_recurso  | id_clasificacion_recurso
+  -----------------------------------------------------------------------------------------------------
+   1  |I_CONSUMO  | otros gastos | 10/10/24	|  1    | 22             |  1               |  3
+
+
+   tabla precio_recuros 
+
+   id | id_recurso | monto | fecha      | descripcion 
+   ----------------------------------------------
+    1 |   1        | 100   | 10/01/24   | 
+    1 |   1        | 80    | 10/02/24 
+  
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+   tabla  recurso_presupueto 
+
+    id | id_prsuepuesto | id_recurso
+    ---------------------------------
+    1  | 1              | 2 
+    2  | 1              | 4 
+    3  ¡ 1              | 2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+    tabla almacen 
+
+    id |  nombre | tipo    |
+    -------------------------
+    1  | Central | central |     
+
+
+
+   tabla licitación
+
+
+   id | titulo | estad | 
+  -------------------------------------
+   2  ! lis_1  | true  |  
+   3  |lis 32  | false |
+   4  | lis 22 | true  |
+
+
+
+
+   tabla presupeto 
+
+   id | titulo | subtitul | id_licitacion 
+   ---------------------------------------
+    1 | prsup  | sub _ 2  |  2
+    2 | presu  | sub _3   |  2
+
+
+
+  // tabla meta_presupuesto
+
+
+   tabla partida
+
+   id | titulo   | descripcion      | id_presupuesto 
+   --------------------------------------------------
+    1 |Encofrado | Encofrado de ... |   1
+
+
+
+  tabla recurso_estimado 
+    
+   id | nombre      | descripcion     | costo | id_partida 
+   ------------------------------------------------------- 
+    1 | Fierro cor  | 3/8 sider peru  |  20   |    1
+    2 | operarios   | pesonal con mas |  10   |    1 
+
+   
+   
+   tabla usarios 
+
+    id | nombres | apellidos | cargo_id  | rol_id
+    ---------------------------------------------
+     1 | lucho   | martel    |  2        | 1 
+     2 | root    | master    |  1        | 1
+     3 | Mila    | campos    |  3        | 1 
+
+    
+  tabla cargo 
+
+   id | nombre   | descripción 
+   --------------------------
+    1 | Gerente  |  
+    2 |asistente |  
+    3 |Jefe plan |
+
+  tabla roles 
+
+    id | nombre         | descripción 
+   --------------------------
+    1 |administador  |  
+    2 |suscriptor    |  
+
+
+   tabla obra
+
+    id | titulo | fecha_ini | fecha_fin | id_presupuesto | cod_obra 
+   ----------------------------------------------------------------
+    1  | OB-001 | 22-08-2024| 22-02-2025|  2             |   00AA
+    2  |
+
+   tabla usuarios_aprobacion_obra 
+
+    id | id_obra | id_usario | fecha
+    -------------------------------- 
+     1 |    1    |  1        | 22/07/2024
+     2 |    1    |  3        | 23/07/2024
+
+
+   tabla obra_almacen
+
+
+    id | id_obra | id_almacen | fecha  
+  --------------------------------
+     1 |   1     |       1    | 25/07/2024
+
+
+
+  tabla  orden_compra 
+
+   id | cod_orden | id_presupuesto | estado  | id_usuario  |fecha_ini | fecha_fin 
+  ---------------------------------------------------------------------------------
+    1 | 000OA1    | 1              | true    |  234        |          |         
+
+
+
+
+    tabla orden_compra_recurso
+
+    id | id_orden_compra |   id_recurso
+  ---------------------------------------
+    1  |       1         |        1
+    2  |       1         |        7
+    
+  
+
+
+  tabla compra
+
+  id | id_proveedor | id_usuario  |   id_orden_compra |
+ -------------------------------------------------------------
+  1  |  1           |  3          |            1      |
+  2  |  2           |  2          |            1         
+   
+
+
+  tabla comprobante 
+
+  id | nombre_archivo | tipo | id_compra | cod
+  ---------------------------------------------
+   1 | E01-1.pdf      |  1   |  1        | 204534343
+   2 | Guia.pdf       |  2   |  1        | E01-22
+
+
+
+ tabla tipo_comprobante
+
+   id | nombre   | descripcion 
+   ----------------------------
+   1  | Factura  |     
+   2  | guia r
+   
+
+  tabla compra_recurso 
+
+
+  id | id_compra  |   id_recurso |  
+-----------------------------------------------------
+  1  |  1         |     122      |
+  2  |  1         |     1        |  
+
+
+
+  tabla cotización 
+
+
+  id |cod_cotizac | fecha    | id_proveedor | id_usuario | id_orden_compra  | aprobacion
+ ----------------------------------------------------------------------------------------
+  1  |  000A1     | 02/06/24 |   1          |    1       |   1              |  true
+  2  |  000A2     | 03/06/24 |   1          |    2       |   2              |  false 
+
+
+  tabla cotización_recurso 
+
+
+  id | id_cotización | id_recurso 
+  ---------------------------------
+   1 |    1          | 1
+   2 |    1          | 2 
+
+
+  tabla proveedor  
+
+  id | nombre    | ruc  
+ ---------------------
+  1  | siderperu | 203433434
+  2  |          
+   
+
+  
+**************************************************************************
+
+
+	++++++++++++++++++++++++++++++++++++++++
+	 tabla bodega_movimiento 
+
+	  id | id_obra | tipo  | fecha 
+	 -------------------------------
+	  1  |  1      |  1    | 02/06/24
+	  2  |  1      |  2    | 02/06/24
+
+	+++++++++++++++++++++++++++++++++++++++++  
+
+
+ tabla bodega 
+
+  id | codigo   | nombre                | descripcion 
+ -----------------------------------------------------------------------------
+  1  | CU-MAC4  | Nobre e obra          | Son   Recursos nuevos  
+  2  | BDG-MAC4 | Bodega                |  Recursos usadas
+  3  | BTI-MAC4 | Bodega TI             |  Recurso tecnologico , laptops, etc 
+  4  | VEL-MAC4 | Equipos de combustion |   
+    	 
+  
+	++++++++++++++++++++++++++++++++++++++++++
+	 tabla  bodega_moviento_recurso 
+
+	  id | id_bodega_moviento   | id_recurso 
+	  ------------------------------------------ 
+	  1  
+	++++++++++++++++++++++++++++++++++++++++++
+
+
+ tabla salida_tipo 
+
+
+ id |    nombre         | descripción 
+---------------------------------------
+  1 | Vales de salida   |
+  2 | Transferencias    |
+  3 | Descuentos        |
+  4 | Prestamo          |
+
+
+ tabla ingresos_ingreso 
+
+   id |        nombre             | descripción
+   ----------------------------------------------
+    1 |  Compra                   |
+    2 |Recepción de trasnferncia  |
+    3 |Devolución de prestamo     |
+    4 |Devoluciones de recursos   |
+    5 |Reingreso por pasar a Bodega        
+
+  
+******************************************************* **************
+
+
+ tabla  salida_recurso 
+
+
+   id | id_usuario(otorgado) |  estado   |   aprobado     | fecha        | id_salida_tipo  | id_bodega |   id_obra 
+   -------------------------------------------------------------------------------------------------------------
+    1 |     23               |           |    true        | 02/03/2023   |       1         |   1       | 32 
+
+
+
+  tabla salid_recursos_detalle 
+
+
+  id | id_salida_recurso |  id_recurso   
+ ---------------------------------------
+   1 |   1               |  34
+   2 |   1               |  22  
+   
+
+
+  tabla devolucion_recursos_almacen 
+
+
+   id | id_usuario(otorgado) |  estado   |   aprobado     | fecha        | id_salida  | id_bodega |   id_obra 
+   -------------------------------------------------------------------------------------------------------------
+    1 |    22                |           |                | 22/07/2024   |     1      |    1      |     2
+
+
+
+  tabla salid_recursos_almacen
+
+ id | id_salida_recurso |  id_recurso   
+ ---------------------------------------
+   1 |   1               |  34
+   2 |   1               |  22  
+
+
+*****************************************************************
+
+&&&&&
+   tabla salida_descuento 
+
+
+  id |  | id_usario( afectado  ) | Fecha      | estado   
+ ------------------------------------------------------
+   1 |  |  34                    | 22/06/2024 |  true 
+
+
+   tabla salida_descuento_recurso 
+
+    id | id_recurso | id_salida_descuento       
+   -------------------------------------------
+    1  |  2         |    1
+    2  |  34        |    1
+    3  |  12        |    1 
+    
+    tabla salida_descuento_aprobación
+
+
+   id | id_salida_descuento |   id_usuario (aprobador)    
+ -------------------------------------------------------
+   1  |    1                |       23
+   2  |    1                |       23
+   3  |    1                |       12
+
+
+
+  tabla devolucion_decuento 
+
+
+    id | id_salida_descuento   |  fehca_deb    |
+   ---------------------------------------------------
+    1  |        1              | 25/06/2024    |
+
+ &&&&&&
+
+
+   tabla prestamo personal 
+
+    id |  estado | id_usario( recibe  ) | id_bodega | id_obra 
+   -----------------------------------------------------------------
+     1 |   true  |  34                  | 3         | 22
+     2 |   false |  50                  | 2         | 28 
+     
+    
+    tabla recurso_prestamo_personal 
+
+	   id |    id_recurso    |  id_prestamo_personal  |    
+	  ---------------------------------------------------  
+	   1  |    1             |           1            |
+	   2  |    33            |           1            |         
+	   3  |    3             |           1            |
+       4  |    2             |           2
+       5  |    4             |           2
+
+     tabla devolucion_prestamo_persona
+
+     id  | id_usuario (entrega)  |    fecha    | id_prestamo_personal
+     ------------------------------------------------------------------
+      1  |      23               | 30/07/2024  |    2
+
+
+    tabla devolucion_prestamo_persona_recurso
+     
+     id | id_recurso |  id_bodega  | id_obra      | notas_estado_recurso
+     --------------------------------------------------------------
+      1 |   2        |     1       |  2            |   ok 
+
+   &&&&&&
+
+
+     tabla transaferencia_obra 
+
+
+    id |  estado | id_usario( envia  ) | id_bodega | id_obra 
+   -----------------------------------------------------------------
+     1 |   true  |  34                  | 3         | 22
+     2 |   false |  50                  | 2         | 28 
+     
+
+
+       id |    id_recurso    |  id_trasnferencia_obral|    
+	  ---------------------------------------------------  
+	   1  |    1             |           1            |
+	   2  |    33            |           1            |         
+	   3  |    3             |           1            |
+
+
+
+     tabla recepcion_transferencias_obra  ( validacion )
+
+
+     id |  aprobación | id_transferencia_obra   |   id_usario(recepciona)  | 
+   ------------------------------------------------------------------------------
+     1  |   true      |         1               |              1           | 
+     2  |   false     |         2               |              3           |  
+     
+
+       id |    id_recurso    |  id_recepcion_trasnferencia|    
+	  ---------------------------------------------------  
+	   1  |    1             |           1                |
+	   2  |    33            |           1                |         
+	   3  |    3             |           1                |
+
+
+ &&&&&
+
+        
+       tabla transaferencia_bodega
+
+
+    id |  estado | id_usario( envia  ) | id_bodega | id_obra 
+   -----------------------------------------------------------------
+     1 |   true  |  34                  | 3         | 22
+     2 |   false |  50                  | 2         | 28 
+     
+
+       id |    id_recurso    | id_trasnferencia_bodega|    
+	  ---------------------------------------------------  
+	   1  |    1             |           1            |
+	   2  |    3             |           1            |         
+
+
+
+	  tabla reingreso_bodega 
+
+
+     id |  aprobación | id_transferencia_bodega |  id_usario(recepciona)   | 
+   ------------------------------------------------------------------------------
+     1  |   true      |         1               |              1           | 
+     2  |   false     |         2               |              3           |  
+     
+
+       id |    id_recurso    |  id_recepcion_bodega  |    
+	  ------------------------------------------------- 
+	   1  |    1             |           1           |
+	   2  |    33            |           1           |         
+	   3  |    3             |           1           |
+
+    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                            RESUTLADO DE TERCER FORMA NORMAL  MOVIMIENTO ALAMACEN 20/07/24 
+
+
+
+          Movientos alamacen 
+
+		   salida_recurso
+		   devolucion_recursos_almacen
+
+		   prestamo personal
+		   devolucion perestamo personal 
+
+		   trasnferencia obra
+		   recepcion trasnsferencia obra 
+
+		   transferencia bodega
+		   ingreso bodega 
+   
+
+  ** salida_descuento 
+  **  devolucion_desucento 
+
+
+     tabla moviento 
+     
+        id |        nombre              | descripción
+        ----------------------------------------------
+         1 |Salida recurso              |
+         2 |devolución recursos almacen |
+         3 |Salida descuento            |   
+         4 |devolución descuento        |  
+         5 |Prestamos personal          |   
+         6 |Devolución prestamo persona |  
+         7 |Transferencia  otras obras  |             
+         8 |Recepción de trasferencia o.|  
+         9 |Trasnferencia bodega        |
+        10 |Reingreso bodega 
+
+
+
+
+		 tabla  Transferencias  
+
+		   id | id_usuario(otorgado) |  estado   |   aprobado      | fecha        | id_moviento     | id_bodega |   id_obra  | 
+		   -------------------------------------------------------------------------------------------------------------------
+		    1 |     23               |     ok    |    true         | 02/06/2024   |       1         |   1       | 32         |      
+		    2 |     23               |     ok    |    true         | 28/06/2024   |       2         |    1      |  22        |   
+		    3 |     0                |     bad   |    true         | 30/06/2024   |       3         |    2      |  2         |          
+		    5 |      34              |     ok    |    true         | 01/07/2024   |       5         |    1      |  4         |              
+		    6 |      34              |     ok    |    true         | 10/07/2024   |       6         |    2      |  4         |   
+		    7 |      0               |     ok    |    true         | 10/07/2024   |       7         |    1      |  32        |
+		    8 |      96              |     ok    |    true         | 11/07/2024   |       8         |    3      |  34        |
+		    9 |      12              |     ok    |    true         | 15/07/2024   |       9         |    1      |   22       |
+		    10|      30              |     ok    |    true         | 18/07/2024   |       10        |    3      |   22       |          
+
+
+
+         tabla salid_transferencia_detalle 
+           
+           	  id | id_recurso   |  id_transferencia  | estado | observaciones  
+           	 ---------------------------------------------------------------------
+           	   1 |       1      |        1           | ok     | estuche impecable 
+           	   2 |       1      |        1           | ok     | ninguda 
+               3 |      122     |        2           | ok     | Regreso sin estuche  
+               4 |      34      |        3           | bad    | Perdido en el trabajo  
+               5 |       2      |        4           | bad    | dañado en el trabajo   
+               6 |       123    |        5           | ok     | prestamo por 3 días         
+		       8 |      5       |        7           | ok     | prestamo por 10 dias 
+		       9 |      5       |        8           | ok     | Conforme 
+		      10 |      3       |        9           | ok     | Nuevo        
+		      11 |      3       |        10          | ok     | Sin estuche 
+
+
+
+      
+      tabla  moviento_aprobador
+
+       id |  id_transferencia | id_usuario(aprobador) 
+     ------------------------------------------------------
+       1  |     1             |         2
+       2  |     2             |         2
+       3  |     3             |         2        
+       4  |     3             |         3                 
+       5  |     4             |         2
+       6  |     4             |         3 
+       7  |     5             |         2
+       8  |     6             |         2
+       9  |     7             |         2
+      10  |     9             |         5
+      11  |     10            |         2   
+
+
+    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+        
+                     RESUTLADO DE TERCER FORMA NORMAL  MOVIMIENTO ALAMACEN 24/07/24 
+
+
+            tabla almacen
+            
+                 id | nombre                 |  tipo   | Direccion 
+                --------------------------------------------------------
+                 1  | Almacen Huancayo       |  fijo   | Av  Casuarinas  245 
+                 2  | Alamcen Casuarionasa   |  fijo   | Ca  Casuarionas 112 
+                 3  | Campo mar              |  temp   | 
+                 4  | Proyect  1             |  temp   | Jr uno 
+                 5  | Proyect 2              |  temp   | Jr  
+                
+            
+            
+             tabla sub_almacen 
+            
+                id |  Nombres      |   
+              ----------------------------------------
+                 1 |  Principal    |    
+                 2 |  prestamo     |    
+                 3 |  velimaq      |    
+                 4 |  Herramientas |    
+                 5 |  Bodegas      |    
+
+
+                +++++++++++++++++++++++++++++++++++++++++
+               |   tabla sub_almacen_obra
+               | 
+               |     id | id_obra | sub_almacen
+               |      ---------------------------
+               |      1  |    22   | 1
+               |      2  |    22   | 2
+               |      3  |    22   | 3
+               |      4  |    22   | 4
+               |      5  |    22   | 5
+               |      6  |    22   | 1
+               |     7  |    22   | 2
+                     8  |    22   | 3
+                     9  |    22   | 4
+                 
+                  +++++++++++++++++++++++++++++++++++++++   
+                      
+                  tabla obra_almacen 
+                 
+                     id | obra_id   | almacen_id 
+                    ------------------------------  
+                      1 |   32      |     4   
+                      2 |   33      |     5    
+                      3 |   34      |     6
+                 
+                  
+                  tabla almacen_encargado 
+                 
+                      id | id_usuario | id_almacen
+                     -------------------------------
+                       1 |   25       |  1 
+                       2 |   23       |  2
+                       3 |   24       |  4 
+
+
+          	    tabla moviento 
+
+		   id |        nombre              | descripción
+		   ----------------------------------------------
+		    1 |Salida recurso              |
+		    2 |devolución recursos almacen |
+		    3 |Salida descuento            |   
+		    4 |devolución descuento        |  
+		    5 |Prestamos personal          |   
+		    6 |Devolución prestamo persona |  
+		    7 |Transferencia  otras obras  |             
+		    8 |Recepción de trasferencia o.|  
+		    9 |Trasnferencia bodega        |
+		   10 |Reingreso bodega 
+
+
+		    
+   tabla  Transferencias  
+
+   id | id_usuario(otorgado) |  estado   |   aprobado      | fecha        | id_moviento     | id_bodega |   id_almacen  | sub_almacen_id 
+   ------------------------------------------------------------------------------------------------------------------------------------------
+    1 |     23               |     ok    |    true         | 02/06/2024   |       1         |    1      |          32        |      0
+    2 |     23               |     ok    |    true         | 28/06/2024   |       2         |    1      |          22        |      1  
+    3 |     0                |     bad   |    true         | 30/06/2024   |       3         |    2      |          2         |      1   
+    4 |     344              |     bad   |    true         | 30/06/2024   |       4         |    4      |          2         |      1
+    5 |      34              |     ok    |    true         | 01/07/2024   |       5         |    1      |          4         |      1        
+    6 |      34              |     ok    |    true         | 10/07/2024   |       6         |    2      |          4         |      2
+    7 |      0               |     ok    |    true         | 10/07/2024   |       7         |    1      |          32        |      2
+    8 |      96              |     ok    |    true         | 11/07/2024   |       8         |    3      |          34        |      2
+    9 |      12              |     ok    |    true         | 15/07/2024   |       9         |    1      |           22       |      2
+    10|      30              |     ok    |    true         | 18/07/2024   |       10        |    3      |           22       |      2 
+      
+
+    
+   tabla recurso__transferencia_detalle 
+
+	  id | id_recurso   |  id_transferencia  | estado | observaciones  
+	 ---------------------------------------------------------------------
+	   1 |       1      |        1           | ok     | estuche impecable 
+	   2 |       1      |        1           | ok     | ninguda 
+       3 |      122     |        2           | ok     | Regreso sin estuche  
+       4 |      34      |        3           | bad    | Perdido en el trabajo  
+       5 |       2      |        4           | bad    | dañado en el trabajo   
+       6 |       123    |        5           | ok     | prestamo por 3 días 
+       7 |       123    |        6           | ok     | devuelto correctamente 
+       8 |      5       |        7           | ok     | prestamo por 10 dias 
+       9 |      5       |        8           | ok     | Conforme 
+      10 |      3       |        9           | ok     | Nuevo        
+      11 |      3       |        10          | ok     | Sin estuche 
+
+      
+     tabla  moviento_aprobador
+
+       id |  id_transferencia | id_usuario(aprobador) 
+     ------------------------------------------------------
+       1  |     1             |         2
+       2  |     2             |         2
+       3  |     3             |         2        
+       4  |     3             |         3      
+       5  |     4             |         2
+       6  |     4             |         3 
+       7  |     5             |         2
+       8  |     6             |         2
+       9  |     7             |         2
+      10  |     9             |         5
+      11  |     10            |         2    
+
+
+
+       
+     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                     RESUTLADO DE TERCER FORMA NORMAL presupuesto  25/07/24 
+
+
+
+      tabla presupeto 
+
+    id | Codigo           | id_licitacion   | titulos 
+   -----------------------------------------
+    1  | 011-24           |   1             | 
+    2  | 012-24           |   2 
+
+
+   tabla  titulo_presupuesto 
+
+   id | nombre                               | descripcion 
+   ---------------------------------------------------------
+   1 |  OBRAAS PROVICIONALES Y  PRELIMINARES | .....
+   2 |  OBRAAS PROVICIONALES Y  PRELIMINARES | .....
+
+
+   tabla subtitulo_presupuesto 
+
+   id | nombre               |    descripcion  | id_titulo 
+   --------------------------------------------|------------  
+   1  | OBRAS PROVISIONALES  |    .....        |       1
+   2  | OBRAS PRELIMINARES   |    ....         |       1 
+
+
+
+   tabla subtitulo_subtitulo_presupuesto
+
+
+    id | nombre                      |  id_subtitulo_presupuest            
+   -----------------------------------------------------------
+     1 | OBRAS PROVISIONALES FASE 1  |        1
+     2 | OBRAS PROVISIONALES FASE 2  |        1
+     3 | OBRAS PROVISIONALES FASE 3  |        1  
+
+
+
+ 
+     tabla estrucutura_presupuesto 
+     
+       id | id_presupuest | id_titulo  
+      ------------------------------- 
+       1  |      1        |  1
+       2  |      1        |  2
+       3  |      1        |  3
+       4  |      2        |  1
+
+
+
+       id | id_presupuesto |  subtitulo 
+      -----------------------------------      
+       1  |   1             |  1
+       2  |   1             |  2 
+
+
+       id | id_presupuesto  | sub- subtitulo 
+       ------------------------------------
+        1 |    1            |  1
+        2 |    1            |  2
+       
+        
+
+      partida subtitulo 
+
+       id | id_partida |  subitulo_id  
+      -----------------------------
+       1  |   2        |   1
+       2  |   2        |   1
+     
+       
+      
+      paritda sub subtitulo 
+
+       id | id_partida | sub_subtitulo_id 
+      --------------------------------
+        1 |     1      |  1
+       
+
+       partida titulo 
+
+        id | id_partida | titulo_id 
+    ---------------------------------
+         1 |   1       |  
+
+
+      tabla partida
+
+    id | titulo        | descripcion       | presupuesto_id |  costo 
+   -----------------------------------------------------------------------------------
+    1  | Encofrado ... | Encofrado de ...  |        1       |    2000
+    2  | Guardiani ... | ...               |        1       |    200
+    3  | .......       |     ...           |        2       |
+    
+
+
+     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+		   tabla  partida_recurso
+
+		   id |  id_recurso | id_partida  |  costo   | costo_meta
+		  ----------------------------------------------------
+		    1 |       22    |    1        |   800    |  750
+		    2 |       34    |    1        |   700    |  650  
+
+
+		   tabla partida_recurso_meta 
+
+		     id | id_recurso | id_partida |  costo
+		   ----------------------------------------             
+		      1 |   22       |   1        |   750 
+		      2 |   34       |   1        |   650
+
+
+		   tabla  partido_recurso_version 
+
+		      id | id_recurso | id_partida | costo |   fecha 
+		    -----------------------------------------------------
+		      1  |   22       |     1      |   790 | 22/07/2024
+		      2  |   34       |     1      |   700 | 23/07/2024 
+		      3  |   22       |     1      |   695 | 23/08/2024 
+              4  |   22       |     1      |   700 | 29/08/2024 
+		      
+       &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+      Tabla partida_recurso_general 
+
+
+
+     
+      id | id_recurso | id_partida | costo  | costo_meta  | costo_version   |     fecha   | fecha_version
+    ----------------------------------------------------------------------------------------------------
+      1  |   22       |     1      |   790  |      750    |   0             |  22/07/2024 | 0
+      2  |   34       |     1      |   700  |      650    |   0             |  23/07/2024 | 0 
+
+
+
+      id | id_recurso | id_partida | costo  | costo_meta  | costo_version |     fecha   | fecha_version
+    ----------------------------------------------------------------------------------------------------
+      1  |   22       |     1      |   790  |      750    |   750         |  22/07/2024 | 22/09/2024
+      2  |   34       |     1      |   700  |      650    |   690         |  23/07/2024 | 22/10/2024
+
+
+     
+      id | id_recurso | id_partida | costo  | costo_meta  |      fecha   | 
+    -----------------------------------------------------------------------
+      1  |   22       |     1      |   790  |      750    |   22/07/2024 | 
+      2  |   34       |     1      |   700  |      650    |   
+
+
+
+      
+		      id | id_partida_recurso | costo |   fecha 
+		    -----------------------------------------------------
+		      1  |     1               |   790 | 22/07/2024
+		      2  |     1               |   700 | 23/07/2024 
+		      3  |     1               |   695 | 23/08/2024 
+              4  |     1               |   700 | 29/08/2024 
+
+
+     
+      
+****************************************************************************************
+      tabla presupuesto_meta
+
+   id | id_presupuesto | costo | 	   
+  --------------------------------------
+    1 |       1        | 45000 |
+    2 |       2        | 50000 |
+
+
+
+  
+    tabla presupuesto_version
+
+   id | id_presupuesto | costo  |  fecha  
+   -----------------------------------------
+    1 |        1       |  40000 | 22/08/2025
+    2          1  
+
+ *****************************************************
+

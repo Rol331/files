@@ -1,0 +1,41 @@
+Comando para instalar y chat gtpo desde la terminal sin key in ubuntu:
+paso 1 instalar 
+curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s 
+/usr/local/bin
+
+paso 2 ir a al directorio  
+/usr/local/bin
+paso 3 ejecutar terminal gtp en el directorio
+
+usar bito cli en ubuntu y mac
+
+paso 1: instalar
+https://github.com/gitbito/CLI→ url para instalar 
+
+paso 2: ubicar el archivo de bito → which bito
+
+paso 3: ir al directorio de donde esta bito → /usr/local/bin/bito
+
+paso 4: En el directorio escribir : bito
+ 
+paso 5 : Colocar email de registro / colocar código que es enviado al mail de registro
+
+paso 6 : Escribir la pregunta y presionar ctrl+d 
+
+final : Escribir quit para salir y presionar ctrl +d 
+
+chat gtp terminal en macos
+
+paso 1 : Instalar
+https://github.com/aandrew-m
+e/tgpt →url para instalar
+
+curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+
+Paso 2 : ir al archivo donde se instaló  /usr/local/bin
+
+paso 3:  Escribir tgpt ‘dentro de comillas para buscar’ enter
+
+https://www.youtube.com/watch?v=p5O_cvxNe04 → gemini terminal python
+
+AIzaSyCUX5lEDI8iXAbacmXh_nx38iMvjBcjLXs
