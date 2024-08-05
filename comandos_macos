@@ -1,0 +1,214 @@
+Mac comandos 
+
+Comandos 
+
+///////Comando para ver contraseña wifi (se deb estar conecatado)//////////
+    
+        security find-generic-password -D "AirPort network password" -a "EVANZU" -gw 
+        security find-generic-password -D "AirPort network password" -a "SSID" -gw
+
+        security find-generic-password -D “AirPort network password” -g “Evanzu” -gw
+        Security find-generic-password  -D “AirPort network password” -g “Evanzu” -gw
+        Secutirty find-generic password  -D “AirPort network password” -g “Evanzu” -gw
+        Security find-generic  password -D “AirPort network password” -g” “Evanzu” -gw
+        
+        
+ security find-generic-password -D "AirPort network password" -a “VITRALUM SAC - AC” -gw 
+
+security find-generic-password -ga "EVANZU" | grep "password:"  
+
+///////////////////////////////////////////////////// nuevo comando wifi/////////////////////////////////////
+security find-generic-password -ga "MARCOS7-1" | grep "password:"
+
+ ///////////// Comando ARP  //////////////////////////
+
+      arp -a  —> lista todas las ip y mac de la red 
+
+//////////    conecatarme a una re d wifi //////////////////////
+
+networksetup -setairportnetwork $INTERFACE $SSID $PASSWORD
+
+$INTERFACE = identificador tarjeta red  normalmente  en1 
+
+    ////////  ver  todos los nodos de red  ////////
+
+   Traceroute ip o dns
+
+
+///////////////////////////Comando terminal unix/////////////////////////////
+
+Listar solo directorios —>> ls -ld */
+
+sudo rm -rf node_modules/ —> borrar eliminar
+
+////////////////////////////////////////////////////////////////////////////// COMANDO GIT  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+git commit --ammend 
+
+git remote remove origin.  —> eliminar servidor remoto 
+
+git remote set-url origin https://github.com/covende/bbva-frontend.git —> cambiar directorio remoto
+
+git remote add origin https://github.com/covende/bbva-frontend.git —-> añadir directorio remoto 
+
+git remote add origin https://github.com/covende/bbva-frontend.git
+
+git reset --hard cf03aca   
+
+Eliminar rama remota git.   ——>	git remote remove origin 
+
+git commit -m "ok" --no-verify
+Envía un mensaje a todos
+
+git commit -m "ok" --no-verify
+Envía un mensaje a todos
+
+git clone -b main  https://github.com/rolando35/thema_evanzu.git —> clonar una rama especifica
+
+
+git clone -b rolando  https://github.com/covende/covende-backend.git
+
+
+git config --global alias-lg "log --oneline --decorate --all --graph"
+git config --global alias-s "status -s -b"
+git s
+
+
+
+
+////////////////////////////////////////////////////////////// Comando para backup mongo db/////////////////////////////////////////
+
+mongodb+srv://Covende:sytV9HLpUa30QMA9@cluster0.ennzw.mongodb.net/covendeDB?authSource=admin&replicaSet=atlas-ub3gid-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true
+
+mongodb+srv://rolandoramos2013:2BE9k3fVdQGWS3c5@cluster0.7r1n9nb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+mongodb+srv://rolandoramos2013:2BE9k3fVdQGWS3c5@cluster0.7r1n9nb.mongodb.net/covendeDB?retryWrites=true&w=majority
+
+mongodump --uri mongodb+srv://Covende:sytV9HLpUa30QMA9@cluster0.ennzw.mongodb.net/covendeDB
+
+mongorestore --uri mongodb+srv://rolandoramos2013:2BE9k3fVdQGWS3c5@cluster0.7r1n9nb.mongodb.net   —-> base de datos BBVA covende
+
+2BE9k3fVdQGWS3c5
+
+
+////////////////////////////////////////Comando vue //////////////////////////////////
+Instalar sass en vue 
+  - npm i sass-loader
+  - npm install —save-dev node -sass
+
+
+
+///////////////////////////////////comando Laravel ///////////////////////////////
+
+Php artisan —version —>saber la version de marvel
+Composer create-project larval/laravel proyecto —> crear proyecto
+
+php artisan make:model task -m ---> crear el modelo mas la migración 
+php artisan make:migration task —> crea migración si falla
+
+php artisan migrate —> ejecutar la migraciones 
+
+php artisan make:controller TaskController --api —> crear controlador la ultima opción es para api
+
+
+php artisan route:list —> listar las rutas
+
+
+php artisan migrate --path=database/migrations/2022_12_28_221458_create_etiqueta_libro_table.php —> crear un migración o exclusiva o añadir nuevas tablas a la base de dar
+
+
+
+/////////////////////////////////////////////////// ingresar Mac mysql map //////////////////////////////////////////
+
+ cd /Applications/MAMP/Library/bin/ 
+
+ ./mysql --host=localhost -uroot -proot
+
+
+/////////////////////////////////////////////////////// order code visual studi /////////////////////////////////////
+
+Shift + Option + F —> ordenar  código 
+
+Cmd+Shift+N. —> abrir un nueva ventana
+
+ ommand + K , then O —> abrir un tabs en una nueva ventana
+
+Shift + control + acento ( [ ) —> abrir terminal  
+
+ Shift + command + p  ——> abrir opciones de consola 
+
+Shif + command  + R —> refrescar el navegador
+
+
+/////////////*******////////////
+
+///////////////////////////////////////////////////////sass//////////////////////////////////////////////////////////////////////
+sass style.scss:estilos.css
+MacBook-Air-de-rolf:Sastuto rolf$ sass --watch style.scss:estilos.css
+
+////////////////////////////////////////////////////comando para instalar y correo node en ubuntu con webpack ///////////////////////////////////////////////
+
+sudo apt-get install build-essential
+
+
+exander Castillo
+12:06
+sudo npm install -g n
+Alexander Castillo
+12:09
+sudo apt-get install aptitude
+Alexander Castillo
+12:14
+apt-get install node-gyp
+Alexander Castillo
+12:17
+sudo apt-get install build-essential
+Alexander Castillo
+12:38
+sudo apt install redis
+redis-cli --version
+redis-cli --version
+sudo systemctl status redis
+Alexander Castillo
+12:54
+-----------
+chmod 777 nombre_de_carpeta
+Alexander Castillo
+13:13
+npm rebuild
+chmod -R a+x node_modules
+//////////////////////////////////////////////////////////COMADO PARA EJUCARTA CHAT GTP TERMINAL CON PYTHON /////////////////////////////////////
+curl -X POST -H "Authorization: Bearer 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" -H "Content-Type: application/json" -d '{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "You: Hola"}, {"role": "user", "content": "¿Cómo estás?"}]}' https://api.openai.com/v1/chat/completions 
+///////////////////////////////////////////////////////////COMANDOS EMACS//////////////////
+M= esc  
+M-x find-file  —> buscar un archivo, al presionar enter muestra input para digital el archivo si existe lo abre si no crea un nuevo
+C =ctrl
+C-x guarda un archivo
+* C-x: Utilizado para ejecutar comandos como abrir o guardar archivos.
+* C-c: Utilizado para ejecutar comandos personalizados.
+* 
+* C-g: Utilizado para cancelar una acción en progreso o salir de un comando.////ANULA UAN INSTRUCCIÓNNNb
+* 
+* C-s: Utilizado para buscar texto en el archivo actual.
+* C-w: Utilizado para cortar texto seleccionado.
+* C-y: Utilizado para pegar texto previamente cortado o copiado.
+* C-k: Utilizado para eliminar texto desde la posición actual hasta el final de la línea.
+C-z —> salir 
+  Fg—> escribir para regresar
+
+M-x shell : para abrir un terminal en emacs
+ —————————————————————————buffer——————————————————
+
+C-x b cambiar de fuffer es necesario escribir el nombre del buffer si no existe lo crea
+C-x C  C-b —> lista los buffer
+M-x ibuffer —> lista los buffer 
+C-x k -destruye buffer que el indiquemos
+
+
+
+
+///////antoacion/////////
+
+
+git clone -b rolando  https://github.com/covende/covende-backend.git  Username: YOUR_USERNAME Password: YOUR_PERSONAL_ACCESS_TOKEN
+
