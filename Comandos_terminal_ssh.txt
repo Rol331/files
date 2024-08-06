@@ -7,8 +7,6 @@ extraer terminal → unzip tierraBlanca.zip
 Descargar desde termina → scp -r  wh52o55jo1zx@107.180.2.121:/home/wh52o55jo1zx/public_html/bmatic.com.pe /Users/rolf  . (el punto es importante para indicar en que direcctorio se esta guardado el punto indica el directorio actual
 )
 
-////////////Youtbe en terminal mps -youtube —	> instalar y actualizar con pip 3
-
 
      nc -zv 107.180.2.121 22  --> Comando para verificar si el servidor remoto ssh esta activo 
 
@@ -20,6 +18,14 @@ Descargar desde termina → scp -r  wh52o55jo1zx@107.180.2.121:/home/wh52o55jo1z
 
 	scp -o HostKeyAlgorithms=ssh-rsa wh52o55jo1zx@107.180.2.121:/home/wh52o55jo1zx/public_html/evanzu.com/ecomoda/two-b_ecomoda.sql ./
 	→ descargar archivo en el directorio actual 
+
+
+
+INSTALAR YEWTUBE ( mps -youtube)
+
+0) https://github.com/mps-youtube/yewtube
+1) Instalar y actualizar con pip 3 yewtube
+2) Instalar con pipx yewtube ( en ubuntu me resulto pip3 no encontraba el repositorio)
 
  MOVER
  
@@ -60,6 +66,23 @@ R APACHE EN MACOS TERMINAL
   /usr/local/var/www/mi-sitio-web/ --> ruta direcorio apache en macos
 
 
+NVM (INSTALADOR DE VERSIONES DE NODE FACIL)
+
+1) instalacion
+ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+ 
+2) instalar version de node
+
+nvm install 20 --> cambiar el numero por la version que se quiera instalar
+
+3)Comando para usar la version instalada (puedes instalar y usar varias veriones)
+
+ nvm use 20 
+
+4) Verificar y disfrutar
+
+node -v 
+npm -v
 
 
            INSTRUCCIONES PARA GENERAR SSL CON LETSENCRYPT 
