@@ -37,8 +37,15 @@ Paso 2 : ir al archivo donde se instaló  /usr/local/bin
 
 paso 3:  Escribir tgpt ‘dentro de comillas para buscar’ enter
 
-CHAT GEMINI EN TERMINAL
+
+CHAT GEMINI EN TERMINAL CON PYTHON (instalado en macos)
 
 https://www.youtube.com/watch?v=p5O_cvxNe04 → gemini terminal python
 
 AIzaSyCUX5lEDI8iXAbacmXh_nx38iMvjBcjLXs
+
+CHAT GEMINI EN TERMINAL CON NODE 
+
+Paso 1:  Tener instalado node , un version mayor a 18 (puedes usar nvm)
+Paso 2:  Ejecutar el segundo comando : npx gen-ai-chat@latest
+Paso 3:  Empezar a chatear con el comando npx gen-ai-chat "Hola"

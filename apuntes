@@ -121,3 +121,11 @@ H02960635
 ----------------Comandos de red 2024------------------
 
 Ver contraeña de wifi: security find-generic-password -ga "UAP-INACONS" | grep "password:"
+
+speedtest-cli --> Comando para ver la velocidad de internet(se debe instalar el programa);
+
+speedtest-cli --simple --> Comando para ver solo la velocidad de descarga
+
+speedtest-cli --simple --upload-only --> Comando para ver la velocidad solo la velocidad de subida
+
+
