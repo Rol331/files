@@ -1,4 +1,4 @@
-TERMINAL 
+                                               TERMINAL 
 
 Hacer una  backup en el misma carpeta   —>   mysqldump -u evanzu -p --no-tablespaces  mi_tierra_db > tierraDB.sql  
  ziperar de desde terminal  →   zip -r tierraBlanca.zip tierraBlanca (r par un directorio )
@@ -6,7 +6,6 @@ extraer terminal → unzip tierraBlanca.zip
 
 Descargar desde termina → scp -r  wh52o55jo1zx@107.180.2.121:/home/wh52o55jo1zx/public_html/bmatic.com.pe /Users/rolf  . (el punto es importante para indicar en que direcctorio se esta guardado el punto indica el directorio actual
 )
-
 
      nc -zv 107.180.2.121 22  --> Comando para verificar si el servidor remoto ssh esta activo 
 
@@ -33,7 +32,7 @@ INSTALAR YEWTUBE ( mps -youtube)
 
 	 move .htaccess /home/wh52o55jo1zx/public_html/evanzu.com/ecomoda → mover un archivo
 
-     mv /Users/rolf/Downloads/id_rsa.ppk .   ---> mueve el archivo a la carpeta actula donde me encuentro 
+     mv /Users/rolf/Downloads/id_rsa.ppk .   ---> mueve el archivo a la carpeta actula donde me encuentro (archivo id_rsa.ppk)
 
 
  CAMBIAR DE NOMBRE ARHCIVO 

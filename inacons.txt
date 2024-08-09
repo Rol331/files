@@ -49,11 +49,10 @@ Diagrama de base de datos
 
 https://dbdiagram.io/d/INACONS_DB-66991c6e8b4bb5230eb5d486
 
-https://dbdocs.io/rolandoramos2013/inacons(sin contraeña) 
-
 
    Accesos a al documentacion de la base de datos 
    -------------------------------------------------
+  url:  https://dbdocs.io/rolandoramos2013/inacons(sin contraeña) 
   url:https://dbdocs.io/rolandoramos2013/INACONS-DB
   contraseña:C35d2jj@PHeAVpF 
 
@@ -236,12 +235,16 @@ DUDAS DE FUNCIONALIDAD
 
        Debe tener niveles de aprobación 
        
+       -- si el presupueto es nuevo o su stock es nulo automticamente se crea orden de compra 
+       -- la orden  de compra es la tabla  solicitud     
+       -- la orden de Trasnferncia puede ser la tabla transferencia
+       
        
     **********MODULO CREACION DE OBRA   **************
        
         Con el presupuesto creado se crea la obra 
         Se define los usuarios de aprobacion para ese obra 
-        Se define los almacenes
+        Se define los almacenes  <<
 
         
        
@@ -255,7 +258,7 @@ DUDAS DE FUNCIONALIDAD
         Debe mostrar el precio referencial de la GENERACION DE RECURSOS 
         Debe mostrar si el RECURSO se recibió (preguntar quien debe recibirlo , responsable de obra?)
         Debe mostrar el estado del registro de la factura
-        Niveles de aprobación 
+        Niveles de aprobación (Primero jefe de compras, jefe proyectos, gerencia)
         Debe jalar los recursos de forma masiva en la compra ( se hiran comprando los recursos?) 
         El PRECIO DEL RECURSO no debe sopresar al precio del RECURSO del PRESUPUESTO 
         Mostrar si el RECURSO ya tiene una GENERACION DE RECURSOS (orden de compra)

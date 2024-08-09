@@ -1,3 +1,23 @@
+COMANDOS ESTADO DENOMIO  MYSQL
+ 
+sudo systemctl start mysql.service 
+sudo systemctl status mysql.service
+sudo systemctl stop mysql
+
+COMANDOS USUARIOS
+ 
+sudo mysql 
+SELECT User, Host FROM mysql.user; --> lista todos los usuarios
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'tu_nueva_contraseña'; --> comando para cambiar de contraseña
+CREATE USER 'nombre_usuario'@'localhost' IDENTIFIED BY 'contraseña'; --> crear usario (obio)
+
+GRANT ALL PRIVILEGES ON *.* TO 'nombre_usuario'@'localhost';
+FLUSH PRIVILEGES;
+
+Este comando le da al usuario todos los privilegios sobre todas las bases de datos (*.). El comando FLUSH PRIVILEGES; se
+ utiliza para recargar los privilegios del sistema, asegurándose de que los cambios surtan efecto inmediatamente.
+
+
 COMANDOS PARA LIMPIAR PANTALLA 
   \! clear
 

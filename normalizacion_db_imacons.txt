@@ -556,7 +556,7 @@
     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         
-                     RESUTLADO DE TERCER FORMA NORMAL  MOVIMIENTO ALAMACEN 24/07/24 
+                     RESUTLADO DE TERCER FORMA NORMAL  MOVIMIENTO ALMACEN 24/07/24 
 
 
             tabla almacen
@@ -874,3 +874,174 @@
 
  *****************************************************
 
+
+                 NUEVAS TABLAS 
+
+         log_presupuesto (histoiral de presupuesto )    
+
+     id | id_prespuesto | usuario_id   | motivo  | fehca
+   -----------------------------------------------
+      1 |        1      |   2          | update  | 8/09/2024
+      2 |        2      |   3          | insert  | 8/09/2024
+              
+&&&&&&&&&&&&&&&&& Normalizacion aprobación compra 
+
+     Aprobación compra 
+
+    id | id_usario |orden_compra_id | fecha 
+   -------------------------------------------
+    1  |  1        |     1          |  22/09/2024
+    2  |  3        |     1          |  22/09/2024
+    3  |  2        |     1          |  23/09/2024 
+    4  |  
+
+    aprobación compra _version 2 
+
+    
+    id | orden_compra_id |   ap_1   | ap_2   | ap_3 |     fecha 
+   --------------------------------------------------------
+    1  |        1        |     1    |   3    |   2  |    22/09/2024
+    2  |        3        |     1    |   2    |   0  |    22/09/2024
+    3  |        2        |     1    |   0    |   0  |    23/09/2024 
+    4  |  
+
+
+    id | orden_compra_id |   ap_1   | ap_2   | ap_3 | ap_4  |     fecha 
+   ---------------------------------------------------------------------
+    1  |        1        |     1    |   3    |   2  |  null |     22/09/2024
+    2  |        3        |     1    |   2    |   0  |  null |  22/09/2024
+    3  |        2        |     1    |   0    |   0  |  null |  23/09/2024 
+    4  |        3        |     1    |   3    |   1  |  4    |    
+
+-----------------------------------------------------------------------
+
+
+  relacion usuario cargo  aprobacion_compra
+
+   cargo 
+
+     id | idusario | nombre_cargo
+  ------------------------------------------  
+     1  |   1      | Jefe de compras 
+     2  |   3      | Jefe de proyectos
+     3  |   2      | gerencia 
+
+  select  
+
+  &&&&&&&&&&&&&&&&& Normalizacon precio aproximado recurso 
+
+
+  Tabla compra
+
+    id | preveedor_id  |   usuario_id  |  orden_compra_id  |  fecha
+  --------------------------------------------------------------------
+    1 |     1          |       45      |         1         | 23/12/2024
+    2 |     22         |       34      |         2         | 23/12/2024
+    3 |     12         |       12      |         2         | 24/12/2024 
+
+   Tabla comprobante 
+
+     id | direccion_archivo | tipo_comprobante_id | compra_id
+    -----------------------------------------------------------
+      1 |  d7fdfdfdfdfd     | 2                   |  1
+    
+          
+
+    Tabla orden_compra 
+
+      id | codigo_orde | usuarios_id  |  presupuesto_id | estado       | fecha_ini | fecha_fin 
+     -------------------------------------------------------------------------------------------- 
+       1 | COT0001123  |    34        |      13         |  completado  | 22/11/2024 | 11/12/2024
+       2 | COT0001124  |   221        |      14         |  pendiente   | 22/11/2024 | 11/12/2024
+                 
+       
+     Tabla orden_compra_recurso 
+
+         id | orden_compra_id | id_recurso | costo_real | costo_aproximado | estado
+     -----------------------------------------------------------------------------------
+        1   |       2         |    5       | 5.7        |  4.5             | pendiente
+        2   |       3         |    122     | 122        |  130             | comprado
+        3   |       4         |    34      | 6.9        |  8               | pendiente 
+        4   |       5      
+
+
+        
+
+
+
+  &&&&&&&&&&&&&&&&&& Normalizacion solicitud  recurso almacen 
+
+
+           tabla   solicitud_presupuesto_alamacen 
+
+
+            id | presupuesto_id  | usuario_id |   fecha   | 
+           ------------------------------------------------------------------
+             1 |    222          |     12     | 22/12/24
+             
+
+
+              tabla   solicitud_recurso_alamacen 
+
+               id | recurso_id  | solicitud_presupuesto_alamacen 
+             ------------------------------------------------------------------ 
+                1 |   22        |     1
+                2 |   34        |     1
+                3 |   23        |     1
+
+                 
+
+          	    tabla moviento 
+
+		   id |        nombre              | descripción
+		   ----------------------------------------------
+		    1 |Salida recurso              |
+		    2 |devolución recursos almacen |
+		    3 |Salida descuento            |   
+		    4 |devolución descuento        |  
+		    5 |Prestamos personal          |   
+		    6 |Devolución prestamo persona |  
+		    7 |Transferencia  otras obras  |             
+		    8 |Recepción de trasferencia o.|  
+		    9 |Trasnferencia bodega        |
+		   10 |Reingreso bodega 
+
+
+		    
+   tabla  Transferencias  
+
+   id | id_usuario(otorgado) |  estado   |   aprobado      | fecha        | id_moviento     | id_bodega |   id_almacen  | sub_almacen_id 
+   ------------------------------------------------------------------------------------------------------------------------------------------
+    1 |     23               |     ok    |    true         | 02/06/2024   |       1         |    1      |          32        |      0
+    2 |     23               |     ok    |    true         | 28/06/2024   |       2         |    1      |          22        |      1  
+    3 |     0                |     bad   |    true         | 30/06/2024   |       3         |    2      |          2         |      1   
+    4 |     344              |     bad   |    true         | 30/06/2024   |       4         |    4      |          2         |      1
+    5 |      34              |     ok    |    true         | 01/07/2024   |       5         |    1      |          4         |      1        
+    6 |      34              |     ok    |    true         | 10/07/2024   |       6         |    2      |          4         |      2
+    7 |      0               |     ok    |    true         | 10/07/2024   |       7         |    1      |          32        |      2
+    8 |      96              |     ok    |    true         | 11/07/2024   |       8         |    3      |          34        |      2
+    9 |      12              |     ok    |    true         | 15/07/2024   |       9         |    1      |           22       |      2
+    10|      30              |     ok    |    true         | 18/07/2024   |       10        |    3      |           22       |      2 
+      
+
+
+
+    
+   tabla recurso__transferencia_detalle 
+
+	  id | id_recurso   |  id_transferencia  | estado | observaciones  
+	 ---------------------------------------------------------------------
+	   1 |       1      |        1           | ok     | estuche impecable 
+	   2 |       1      |        1           | ok     | ninguda 
+       3 |      122     |        2           | ok     | Regreso sin estuche  
+       4 |      34      |        3           | bad    | Perdido en el trabajo  
+       5 |       2      |        4           | bad    | dañado en el trabajo   
+       6 |       123    |        5           | ok     | prestamo por 3 días 
+       7 |       123    |        6           | ok     | devuelto correctamente 
+       8 |      5       |        7           | ok     | prestamo por 10 dias 
+       9 |      5       |        8           | ok     | Conforme 
+      10 |      3       |        9           | ok     | Nuevo        
+      11 |      3       |        10          | ok     | Sin estuche 
+
+      
+  
