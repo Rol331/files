@@ -26,7 +26,7 @@ C-x d -> navegar por los directorios dired (presiona q para volver a una ventana
 M-x rgrep “texto” /usr/share/doc  → colocar el texto de búsqueda en comillas  después el directorio donde buscar (si no se coloca el direcotorio, muestra el actual)
    
 
-Abandonar 
+ABANDONAR
 
 C-z → Abandono momentaneo
 fg → regresar otra vez a emacs
@@ -34,14 +34,15 @@ C-x C-c → salir definitamente
 C-g → Anula el orden de cualquier comando
 
 
-Comandos de autocompletado
+COMANDO PARA AUTOCOMPLETADO 
 M-x auto-complete-mode
 
 
 
- Buffer (Ventanas)
+                                  ***   TODO BUFFER  (Ventanas) ***
 
-Listar buffer
+ LISTAR BUFFER
+ 
 C-x C-b -> listar todos los buffer
 M-x ibuffer -> abre una ventada con los buffer listados 
 M-x list-ibuffer → lista los buffer en el area de mensajes
@@ -98,14 +99,16 @@ Recuerda que `tab-bar-mode` puede tener características adicionales dependiendo
 
 
 
-      ORG MODE 
+                                      ***  ORG MODE  ***
+                                      
 Tienes que crear buffers y después: 
 M-x org-mode → Activa org mode 
 C-x C-s → guardar un archivo org (es fundamental guard con la extención .org)
 M-x → save-buffer  guarda archivo 
 C-x C-s → Cargar archivo
 
-Secciones 
+SECCIONES
+
 *top level Headline
 ** second Level
 *** tercer nivel 
@@ -138,12 +141,11 @@ Etiquetas y propiedades:
          :END:
 
 
-PROGRAMAR EN EMACS 
+                                         ***   PROGRAMAR EN EMACS  ***
 
 M-x linum-mode → Muestra los numeros de la linea de código 
 M-x display-line-numbers-mode → muestras números en la versiones más recientes 
 M-x global-display-line-numbers-mode → muestra números de linea en todas la ventanas de emac (si vuelves a escribir el mismo comando se desactiva)  
-
 s 
 
   TREEMACS 
@@ -168,7 +170,10 @@ C-g → para cancelar busqueda
  Escribe algo en el archivo
  Guarda el archivo con C-x C-s
 
+TAMAÑO DE FUENTE 
 
+C-x  C-+  --> Aumenta el tamaño de fuente 
+C-x  C--  --> disminuye le tamaño de fuente 
 
 
 Indentar código 
@@ -264,8 +269,9 @@ company → autocompletado de código (se instala con melpa)
 Configuración emac
 
 En el archivo init.el o .emacs
-
 en macos se encuentra en : /Users/rolf/.emacs.d/
+en ubuntu se debe crear el archivo init.el en el directorio .emacs.d/
+
 
 NAVEGAR POR INTERNET EN EMACS 
 
@@ -281,5 +287,6 @@ H – ver el historial de sitios visitados, éste se pierde al cerrar eww.
 & – abrir la URL actual en un navegador web externo.
 v – ver código fuente. Se copia el código fuente del sitio en un buffer nuevo, y se activa html-mode si está disponible, bastante útil.
 Si tienen la última versión de Emacs ya lo pueden probar. Para más información: Emacs Web Wowser.
+
 
 

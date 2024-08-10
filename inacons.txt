@@ -56,6 +56,14 @@ https://dbdiagram.io/d/INACONS_DB-66991c6e8b4bb5230eb5d486
   url:https://dbdocs.io/rolandoramos2013/INACONS-DB
   contraseña:C35d2jj@PHeAVpF 
 
+
+
+  Url para verficar si la factura es real 
+  -------------------------------------------------
+  https://cpe.sunat.gob.pe/sites/default/files/inline-files/Manual-de-Consulta-Integrada-de-Comprobante-de-Pago-por-ServicioWEB_v2.pdf
+  
+
+
 ////////////////////////////// ACCESOS POR SHH /////////////////////////////
 
 
@@ -250,25 +258,36 @@ DUDAS DE FUNCIONALIDAD
        
     **********MODULO ORDEN  DE COMPRA (comprar el producto)  **************
 
-        NO SE PUEDE COMPRAR LO QUE NO ESTA REQUERIDO !! (preguntar si es requermiento o requerido)
-        jalar las  ORDEN DE COMPRA desde LA GENERACION DE RECURSOS 
-        se debe  actualizar EL RECURSO de una  PARTIDA   
-        Debe mostrar el precio referencial desde la GENERACION DE RECURSOS 
-        Debe generar compra con cotizaciones 
-        Debe mostrar el precio referencial de la GENERACION DE RECURSOS 
-        Debe mostrar si el RECURSO se recibió (preguntar quien debe recibirlo , responsable de obra?)
-        Debe mostrar el estado del registro de la factura
-        Niveles de aprobación (Primero jefe de compras, jefe proyectos, gerencia)
-        Debe jalar los recursos de forma masiva en la compra ( se hiran comprando los recursos?) 
-        El PRECIO DEL RECURSO no debe sopresar al precio del RECURSO del PRESUPUESTO 
-        Mostrar si el RECURSO ya tiene una GENERACION DE RECURSOS (orden de compra)
-        Mostrar si el RECUROS esta asignado a un alamcen 
-        Mostrar si el RECURSO tiene una factura asignada 
-        Mostar  si el RECURSO tiene guia de recepcion del recepción
-        Mostrar si se cuenta con GUIA, FACTURA, GUIA DE TRANSPORTISTA  
-        Mostrar detalle de ingreso del producto 
-        Mostrar editar la opcion para que cada RECURSO sea cotizado por varios proveddores 
-        La compra de debe ser total o parcial mostrando que RECURSOS estan pendientes de compra
+        NO SE PUEDE COMPRAR LO QUE NO ESTA REQUERIDO !! (preguntar si es requermiento o requerido)  ✓
+        jalar las  ORDEN DE COMPRA desde LA GENERACION DE RECURSOS ✓
+
+        ** se debe  actualizar EL RECURSO de una  PARTIDA   **
+        
+        Debe mostrar el precio referencial desde la GENERACION DE RECURSOS ᜓ ✓
+        Debe generar compra con cotizaciones  ✓
+      
+        Debe mostrar si el RECURSO se recibió (preguntar quien debe recibirlo , responsable de obra?) 
+        
+        Debe mostrar el estado del registro de la factura  ✓
+        Niveles de aprobación (Primero jefe de compras, jefe proyectos, gerencia) ✓
+        Debe jalar los recursos de forma masiva en la compra ( se hiran comprando los recursos?) ✓ 
+        El PRECIO DEL RECURSO no debe sopresar al precio del RECURSO del PRESUPUESTO  ✓
+        Mostrar si el RECURSO ya tiene una GENERACION DE RECURSOS (orden de compra)   ✓
+        
+        ** Este modulo tambien debe tener la opcion de ver si ya OC cuenta con ingreso a almacen mediante FACTURA,
+        ** Y GUIA recepcion y de transportista (EL ERP ACTUAL NO ADJUTNA LA GUIA O  NO S EPUEDE LLEVAR ESE CONTROL) ✓
+        
+        Mostrar si el RECUROS comprado   esta asignado a un alamcen ✓
+        Mostrar si el RECURSO comprado   tiene una factura asignada (cuando esta comprado si) ✓
+        
+        Mostar  si el RECURSO tiene guia de recepcion de recepción ✓
+        
+        Mostrar si se cuenta con GUIA, FACTURA, GUIA DE TRANSPORTISTA ✓ 
+
+        Mostrar detalle de ingreso del  RECURSO ( producto)    ✓
+        
+        Mostrar editar la opcion para que cada RECURSO sea cotizado por varios proveddores ✓ 
+        La compra de debe ser total o parcial mostrando que RECURSOS estan pendientes de compra  ✓
 
 
   **********MODULO ALMACEN  **************      
