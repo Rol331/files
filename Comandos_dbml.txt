@@ -1,5 +1,8 @@
-INSTALACIÓN 
+COMANDO PARA LISTAR TODOS LOS PROGRAMA NPM INSTALADOS GLOBALMENTE 
 
+ npm list -g --depth=0
+
+INSTALACIÓN 
 
  npm install -g @dbml/cli --> Libreria para covetir archivos .dbml a sql(postgre y mysql)
 

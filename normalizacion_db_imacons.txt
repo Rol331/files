@@ -1334,5 +1334,31 @@
 
  
 
+ &&&&&&&&&&&&&&&&&&&&&&& Normalizacion de imagenes porrecurso 
 
-    
+
+
+         Tabla recurso 
+
+     id | nombre | fecha     
+ ----------------------------
+     1   | lamp  | 23/12/2014 
+
+
+
+   tabla imagen_recurso 
+
+
+   id | id_recurso | file     	| fecha
+   -----------------------------------------
+     1|  1         | fsdf.png    | 23/12/2024  
+     2|  34        | data.png    |
+     4|  1         | deli.png    |
+     5|  2         | dsd.png     |
+     6|  1         | fadfdfd.png |
+   
+
+
+
+     
+     

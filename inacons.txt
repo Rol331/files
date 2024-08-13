@@ -43,6 +43,12 @@ Diagrama de base de datos
   ene06ind
   3DWPIHH4S3IQ5@$abc
 
+  Accesos por ftp 
+ ------------------
+  FTP Username: rolf@inacons.com.pe
+  FTP server: ftp.inacons.com.pe
+  FTP & explicit FTPS port:  21
+
 
  Accesos al diagrama de la base de datos 
  -------------------------------------------

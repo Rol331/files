@@ -57,12 +57,26 @@ ls -ltu   --> listar archivos en orden de creación
 
 ls -lt | awk 'NR<=11 {print $9}'  ---> Listar los ultimos 10 archivos creados
 
+ COMANDOS FTP TERMINAL
 
-R APACHE EN MACOS TERMINAL 
+ mput archivo1.txt archivo2.txt archivo3.txt  --> subir varios archivos por terminal
+ mput * .txt --> comodin para subir varios archivos  por extención 
+
+ mget archivo1.txt archivo2.txt archivo3.txt  --> descargar  varios archivos por terminal
+ mget * .txt --> comodin para subir varios archivos  por extención 
+  put directorio.tar.gz  --> se puede subir comprimiento 
+  tar xzf directorio.tar.gz --> desconprimir cuando se este conectado 
+  
+  APACHE EN MACOS TERMINAL 
 
   sudo apachectl start --> Comando para arrancar a apache 
-
   /usr/local/var/www/mi-sitio-web/ --> ruta direcorio apache en macos
+
+  APACHE EN UBUNTU 
+
+  sudo systemctl start apache2 --->  Arrancar apache 
+  sudo systemctl enable apache2 -->  Inicio de apache automaticamente 
+  /var/www/html/ --> ruta node se ejecuta los archivos apache  
 
 
 NVM (INSTALADOR DE VERSIONES DE NODE FACIL)
