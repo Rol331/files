@@ -1,9 +1,12 @@
                                                TERMINAL 
 
-Hacer una  backup en el misma carpeta   —>   mysqldump -u evanzu -p --no-tablespaces  mi_tierra_db > tierraDB.sql  
- ziperar de desde terminal  →   zip -r tierraBlanca.zip tierraBlanca (r par un directorio )
-extraer terminal → unzip tierraBlanca.zip
+ZIPEAR 
 
+  ziperar de desde terminal (macos)  →   zip -r tierraBlanca.zip tierraBlanca (r par un directorio )
+  extraer terminal → unzip tierraBlanca.zip
+  zip -r nombeDelArchivo.zip nombreDelDirectorio/  -->  zipear directorio completo (con directorios anidados) en Ubuntu 24 
+  unzip -l nombreDelArchivo.zip  --> comprobar el directorio zipeado
+  
 Descargar desde termina → scp -r  wh52o55jo1zx@107.180.2.121:/home/wh52o55jo1zx/public_html/bmatic.com.pe /Users/rolf  . (el punto es importante para indicar en que direcctorio se esta guardado el punto indica el directorio actual
 )
 
@@ -33,7 +36,15 @@ INSTALAR YEWTUBE ( mps -youtube)
 	 move .htaccess /home/wh52o55jo1zx/public_html/evanzu.com/ecomoda → mover un archivo
 
      mv /Users/rolf/Downloads/id_rsa.ppk .   ---> mueve el archivo a la carpeta actula donde me encuentro (archivo id_rsa.ppk)
+COPIAR 
 
+      cp nombre_arhivo.varios  /mi/directorio/aqui --> compiar archivo a una directorio especifico 
+      cp /mi/direccion/nombre_archivo.varios  /mi/directori/aqui --> copiar de directorio a directorio 
+      cp /mi/direccion/nombre_archivo.varios  . --> copia un archivo al direcorio actula donde me encuentro
+
+      cp -r /var/www/html/inacons_frame . --> copiar todo un directorio a un direcorio especifico 
+       
+      
 
  CAMBIAR DE NOMBRE ARHCIVO 
 
@@ -77,7 +88,8 @@ ls -lt | awk 'NR<=11 {print $9}'  ---> Listar los ultimos 10 archivos creados
   sudo systemctl start apache2 --->  Arrancar apache 
   sudo systemctl enable apache2 -->  Inicio de apache automaticamente 
   /var/www/html/ --> ruta node se ejecuta los archivos apache  
-
+  http://localhost/ --> direccion url apache en local
+  
 
 NVM (INSTALADOR DE VERSIONES DE NODE FACIL)
 
@@ -96,6 +108,22 @@ nvm install 20 --> cambiar el numero por la version que se quiera instalar
 
 node -v 
 npm -v
+
+TEXTO A VOZ TERMINAL
+
+espeak --voices  --> listar todas las voces disponible
+espeak -v es-la  "Texto para el contexto:"
+
+# Especifica l ruta del archivo que deseas leer
+archivo="ruta/a/tu/archivo.txt"
+
+# Opciones adicionales para espeak
+opciones="-s 200" # Ajusta l velocidad aquí
+
+# Usa espeak para leer el contenido del archivo con las opciones especificadas
+espeak $opciones "$archivo"
+
+Con festival se ingresa a su propia interfaz me aprece un eror en la lista de voces , se tiene que correjir
 
 
            INSTRUCCIONES PARA GENERAR SSL CON LETSENCRYPT 

@@ -21,7 +21,6 @@
   ssid: UAP-INACONS  
   password: "UAP-in@22"
 
-
  Cuenta Aronet web
 -------------------
  Url: https://appauranet.com/auraweb/#/ParametricGridSearchMasterDetails/brecursos

@@ -145,8 +145,8 @@ Etiquetas y propiedades:
 
 M-x linum-mode → Muestra los numeros de la linea de código 
 M-x display-line-numbers-mode → muestras números en la versiones más recientes 
+M-x display-line-numbers-mode -->Descativar tambien sirve para desactivar
 M-x global-display-line-numbers-mode → muestra números de linea en todas la ventanas de emac (si vuelves a escribir el mismo comando se desactiva)  
-s 
 
   TREEMACS 
 
@@ -177,8 +177,10 @@ C-x  C--  --> disminuye le tamaño de fuente
 
 
 Indentar código 
-2 –  M-x  indent-region → Comando para ordenar el código 
-x
+1 – C+space → seleccionar el área del código 
+2 –  M-x  indent-region → Comando para ordenar el código  ; C-tab combinacion de tecla 
+--tambien C-x + tab  y con las flechas 
+
 Comentar / descomentar  código 
 1 – C+space → seleccionar el área del código 
 2 – M-x comment-region → comando para comentar código 
@@ -195,6 +197,23 @@ M-g-g → Ir una determinada línea de código
 M-x goto-line  → ir a una determinada línea de código 
 M-x pwd → muestra el directorio actual 
 
+
+### Resumen
+
+- **replace-string** es ideal para reemplazos simples sin necesidad de expresiones regulares.
+- **query-replace** ofrece flexibilidad al permitir tanto cadenas de texto como expresiones regulares para buscar y reemplazar
+.
+- **query-replace-regexp**, aunque no es un comando distinto, representa el uso de query-replace enfocado en expresiones
+ regulares complejas.
+
+
+BUSCAR Y REEMPLAZAR 
+
+M-x replace-string --> Reemplaze un solo texto 
+M-% --> replace string en teclado 
+M-x query-replace. --> Reemplaza texto del curso hacia abajo 
+M-x replace-regexp --> Reemplaza texto en todo el archivo 
+M-x replace-string-in-region. -->obvio  
 
 COMANDOS VARIOS TEXTO
 C-x u → deshacer cambio
@@ -232,13 +251,19 @@ M-> → final del buffer
 C-n → mueve el cursor hacia abajo
 M-x end-of-buffer → final de buffer 
 
+COMANDOS PARA ELIMINAR ESPACIOS EN BLACON AUTOMATICAMENTE 
+
+M-x delete-trailing-whitespace. --> probado elimina todos los espacion de todo el buffer 
+
+M-x whitespace-cleanup --> no funciona (buscar mas info)
+
 
 COMANDO PARA IR DIRECTAMENTE AL ARCHIVO 
 
 
 M-x find-file-at-point -> colocar enl cursor en el código de importación y luego escribir el comando   
 				
-COMANDOS PARA CUSTOMIZAR APARÊNCIA 
+COMANDOS PARA CUSTOMIZAR APARIENCIA 
 
 M-x customize-themes
 Enlace de nord theme: https://www.nordtheme.com/ports/emacs

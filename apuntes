@@ -1,4 +1,4 @@
-sudo powermetrics --samplers smc | grep "CPU die temperature" --> saber la temperatura por terminal
+sudo powermetrics --samplers smc | grep "CPU die temperature" --> saber la temperatura por terminal en macos 
 
 AIzaSyCUX5lEDI8iXAbacmXh_nx38iMvjBcjLXs --> key id google ia gemini
 
@@ -119,8 +119,8 @@ yasuyuki okamura love mesage   ラブメッセージ
 H02960635
 H02960635
 ----------------Comandos de red 2024------------------
-
-Ver contraeña de wifi: security find-generic-password -ga "UAP-INACONS" | grep "password:"
+security find-generic-password -ga "UAP-INACONS" | grep "password:"--> ver contraseña wifi en macos
+nmcli device wifi show-password --> ver contraseña de wifi en ubuntu 24
 
 speedtest-cli --> Comando para ver la velocidad de internet(se debe instalar el programa);
 
