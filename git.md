@@ -49,3 +49,11 @@ git clean -f
 ####eliminar node modules del seguimiento
 
 git rm -r --cached node_modules
+
+git rm -r --cached dist
+
+
+## subir proyecto con contraseña (si se tiene dos cuentas )
+
+git remote set-url origin https://Rol331:<tu-token>@github.com/Rol331/tu-repositorio.git
+git push origin main
