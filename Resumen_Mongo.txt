@@ -1,6 +1,5 @@
 Resumen mongo db 
 
-
 use basedatos → crear base de datos o selecianar una 
 show collections; ---> listar todas las colleciones 
 
@@ -8,11 +7,7 @@ show dbs → lista todas las base de datos
 Listar documentos (contenido de las tablas o colecciones) 
 db.documento.find().limit(5)  → lista los 5 primeros documento
 db.documento.find().sort({_id: -1}).skip(0).limit(5).pretty() → Mostrar los últimos 5 documentos de forma expandida(pretty)
-
 db.coleción.find({nombre:/ /})
-
-custom_id
-
 
 Listar datos 
 db.libros.find()---> mostar todos los registros 
@@ -33,7 +28,6 @@ db.libros.insertOne(
 
 
 BORRAR DATOS DE UNA COLECCIÓN 
-
 -----------------------
 use base1
 db.dropDatabase() ---> elimanr la base de datos
@@ -58,25 +52,86 @@ db.nombreColeccion.deleteMany({ estado: "inactivo" })  ---> con parametro
 
 db.nombreColeccion.deleteOne({ nombre: "Juan" }) --> Elininar un solo documento que cumpla con el criterio (PENDIENTE PRUEBA E INVESTIGACIÓN ) 
 
-producto
-
-parent_category
-
-
-product_attribute
-
-
-61d7636c6657fd00309e4187    LAV3I6877U LAVADORA
-
-61d763406657fd00309e417e    LAVFOCQPI4 LAVADORAS
-
-
-
-false_information
-product_state
-test
-enable
-
 db.product.find({parent_category:"61d763406657fd00309e417e"},{product_name:1,store_id:1, enable:1,false_information:1, product_state:1, test:1,custom_id:1  }).pretty()
 
-~
+/***  Consultas generales ***/
+
+   db.recursos.aggregate([
+       { $group: { _id: "$codigo", count: { $sum: 1 } } },
+       { $match: { count: { $gt: 1 } } }
+   ])
+
+
+1. $group:
+   - Esta etapa agrupa los documentos en un solo grupo.
+   - _id: null indica que no queremos agrupar por ningún campo específico.
+   - count: { $sum: 1 } suma 1 para cada documento en el grupo.
+
+2. $project:
+   - Esta etapa define qué campos incluir en la salida.
+   - count: 1 especifica queremos incluir el campo count.
+
+Explicación detallada:
+
+- La consulta está buscando contar todos los recursos en la colección recursos.
+- El primer paso ($group) crea un único grupo con todos los documentos.
+- Luego, sumariza el conteo de todos los documentos en ese grupo.
+- Finalmente, el segundo paso ($project) filtra solo el campo count en la salida.
+
+Esta consulta resultaría en un array con un solo objeto, donde el valor del campo count sería igual al número total de recursos en la
+ colección.
+
+Por ejemplo, si hay 2  recursos en la colección, la salida podría ser:
+
+[ { _id: '11223344', count: 2 } ]
+
+Esta consulta es útil cuando necesitas obtener un recuento general de elementos en una colección MongoDB sin tener que iterar manual
+mente sobre todos los documentos.
+
+##Convertir todos los documentos que tengan un `codigo` numérico a string, puedes hacer lo siguiente:
+db.recursos.updateMany(
+    { codigo: { $type: "number" } }, // Filtrar documentos donde 'codigo' es un número
+    [
+        { $set: { codigo: { $toString: "$codigo" } } } // Convertir 'codigo' a string
+    ]
+)
+
+##Convertir el `codigo` de un documento específico 
+(por ejemplo, el que tiene `_id: ObjectId('66e47458f0f30374dd3daf05')`), puedes usar:
+
+db.recursos.updateOne(
+    { _id: ObjectId('66e47458f0f30374dd3daf05') }, // Filtrar por ID
+    { $set: { codigo: "13210" } } // Actualizar 'codigo' a string
+)
+
+##listar los últimos 10 documentos de una colección en MongoDB, puedes utilizar la siguiente consulta:
+
+db.collection.find().sort({$natural: -1}).limit(10)
+
+Esta consulta hace lo siguiente:
+
+1. db.collection: Se refiere a la colección que deseas consultar.
+2. find(): Busca todos los documentos en la colección.
+3. sort({$natural: -1}): Ordena los resultados en orden descendente basado en el índice natural del documento (que es similar al orden de
+ inserción).
+
+##i quieres incluir campos específicos en lugar de todos los campos, puedes modificar la consulta así:
+
+db.collection.find({}, { campo1: 1, campo2: 1 }).sort({$natural: -1}).limit(10)
+
+
+Para contar todos los documentos en una colección de MongoDB, puedes usar la siguiente consulta:
+
+
+db.collection.countDocuments()
+
+Esta consulta devuelve el número total de documentos en la colección especificada.
+Si quieres incluir solo ciertos campos en el resultado, puedes usar un objeto de selección:
+
+db.collection.countDocuments({ campo1: valor1, campo2: valor2 })
+
+
+Por ejemplo, si quieres contar solo los documentos donde el campo "estado" sea igual a "activo":
+
+db.collection.countDocuments({ estado: "activo" })
+```

@@ -175,8 +175,7 @@ TAMAÑO DE FUENTE
 C-x  C-+  --> Aumenta el tamaño de fuente 
 C-x  C--  --> disminuye le tamaño de fuente 
 
-
-Indentar código 
+Indentar código (ordena el código si se configura los modos)
 1 – C+space → seleccionar el área del código 
 2 –  M-x  indent-region → Comando para ordenar el código  ; C-tab combinacion de tecla 
 --tambien C-x + tab  y con las flechas 
@@ -198,7 +197,7 @@ M-x goto-line  → ir a una determinada línea de código
 M-x pwd → muestra el directorio actual 
 
 
-### Resumen
+### Resumen del funcionamiento por cada tipo de reemplazo
 
 - **replace-string** es ideal para reemplazos simples sin necesidad de expresiones regulares.
 - **query-replace** ofrece flexibilidad al permitir tanto cadenas de texto como expresiones regulares para buscar y reemplazar
@@ -278,8 +277,9 @@ company → autocompletado de código (se instala con melpa)
 
    Instalar packete con melpa 
   --------------------------
-  
+  M-x package-refresh-contents
   M-x package-install
+  
 
   Instalar packetes con use-package en archvio .emacs
  ---------------------------------------------------
@@ -313,5 +313,16 @@ H – ver el historial de sitios visitados, éste se pierde al cerrar eww.
 v – ver código fuente. Se copia el código fuente del sitio en un buffer nuevo, y se activa html-mode si está disponible, bastante útil.
 Si tienen la última versión de Emacs ya lo pueden probar. Para más información: Emacs Web Wowser.
 
+SQL EN EMACS 
+
+ `M-x sql-mode`  -->  para entrar en el modo SQL.
+ `M-x sql-mysql` -->  para iniciar una conexión a MySQL. Se te pedirá que ingreses el nombre de usuario, la contraseña y el host.
+  ret --> para ejectutar consulta 
+  **programa recomendado --sql-indent
+
+EJECUTAR PROGRAMAS DE TERMINAL
+
+M-x "term" --> ejeuctar terminal y puedes usar programas en terminal
+exit --> escibir  en el terminal((en el mismo buffer terminal)) para salir 
 
 

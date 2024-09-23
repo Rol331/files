@@ -1,5 +1,7 @@
 INSTALAR CHAT GTPTERMINAL DESDE TERMINAL SIN KEY UBUNTU
 
+https://github.com/aandrew-me/tgpt →url para instalar
+
 paso 1 instalar 
 curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s 
 /usr/local/bin
@@ -28,8 +30,7 @@ final : Escribir quit para salir y presionar ctrl +d
 CHAT GPT EN TERMINAL MACOS (SIN APIKEY)
 
 paso 1 : Instalar
-https://github.com/aandrew-m
-e/tgpt →url para instalar
+https://github.com/aandrew-me/tgpt →url para instalar
 
 curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
 

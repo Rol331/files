@@ -61,7 +61,15 @@ https://dbdiagram.io/d/INACONS_DB-66991c6e8b4bb5230eb5d486
   url:https://dbdocs.io/rolandoramos2013/INACONS-DB
   contraseña:C35d2jj@PHeAVpF 
 
+CUENTA BASE DE DATOS MONGO ATLAS 
+ usuario: rramos
+ contraseña: MPqGnZEugJRD7imC
+CADENA DE CONECCION MONGO ATLAS 
+mongodb+srv://rramos:<db_password>@cluster0.xinqt.mongodb.net/
 
+  INGRESAR POR TERMINAL A MONGO ATLAS
+
+    mongosh "mongodb+srv://cluster0.xinqt.mongodb.net/" --apiVersion 1 --username rramos
 
   Url para verficar si la factura es real 
   -------------------------------------------------
@@ -920,5 +928,23 @@ Este script es un punto de partida. Necesitarás ajustar la lógica de adaptaci�
 
 Recuerda reemplazar 'tu_usuario', 'tu_contraseña', y 'nombre_de_tu_base_de_datos' con tus credenciales reales de la base de datos. Además, asegúrate de tener permisos de
  lectura/escritura en el directorio donde intentas guardar los archivos adaptados.
+
+
+-Actidad mostrar listado de orden de compra
+
+1 .- copiar la estrucutra de las otras vistas 
+2 .- listar la data directamente de las tablas implicadas 
+3 .- Realizar consulta de relacion con  las tablas indicas 
+4 .- Codigicar php consulta de relacion de tablas orden_compra con presupuesto
+5.-  codifciar html tabla
+6 .- codifcar funcionalidad de muestra php
+7.- codificar funcionalidad javascirpt.php 
+
+
+
+
+Curl api apellidos
+
+curl -X POST https://inacons.com.pe/ina/api.php -H "Content-Type: application/json" -d '{"nombres": "Noemi Cano", "dni": "42432222", "contrasenna": "mi_contrasena_segura"}'
 
 
