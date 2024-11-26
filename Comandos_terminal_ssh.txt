@@ -195,3 +195,13 @@ nmcli device wifi show-password --> ver la contraseña de internet wifi
           sudo micro /etc/letsencrypt/live/cktravellers.com/fullchain.pem   --> archivo CRT (solo la primera parte)
           sudo micro /etc/letsencrypt/live/cktravellers.com/privkey.pem  ---> archivo KEY 
           sudo micro /etc/letsencrypt/live/cktravellers.com/chain.pem   --> archivo CABUNDLE    
+
+############################################### PROBAR API CON CURL #############################################################################
+
+curl -X POST \
+ https://evanzu.com/covende/dni.php \
+ -H "Content-Type: application/json" \
+ -d '{"dni":42492278}'
+
+
+ 

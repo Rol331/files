@@ -57,3 +57,42 @@ git rm -r --cached dist
 
 git remote set-url origin https://Rol331:<tu-token>@github.com/Rol331/tu-repositorio.git
 git push origin main
+
+
+### me servio solucion Rebase
+
+## 1) Primero, si tienes cambios sin confirmar, necesitas decidir qué hacer con ellos:
+
+# Para guardar los cambios
+git add .
+git commit --amend   # Esto agregará los cambios al commit actual
+#o
+# Para descartar los cambios
+git restore .
+
+# 2) Después, continúa con el rebase:
+
+git rebase --continue
+
+## 3)  Si hay conflictos, Git te los mostrará y deberás resolverlos manualmente. Después:
+
+git add .
+git rebase --continue
+
+
+## 4) Una vez completado el rebase, actualiza la rama remota:
+
+git push origin Rolando --force
+
+## (Nota: usa --force con precaución, especialmente si otros desarrolladores trabajan en la misma rama)
+
+#### Alternativa 
+
+
+## 1) Si prefieres abortar el rebase y empezar de nuevo:
+
+git rebase --abort
+
+## 2) git rebase --abort
+git pull origin Rolando
+

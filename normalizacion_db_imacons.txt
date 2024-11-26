@@ -1226,6 +1226,7 @@
       103|     24                 | 10/08/2024   |       5         |    1      |          22        |      2         |   43434          
 
  __ __ __ __    
+ 
    tabla guia_detalle_transferencia  
 
         id |  id_trasnferencia   |    id_usuario |  tipo    | observacion  | aprobacion     | fecha
@@ -1428,11 +1429,11 @@ tabla transferencia_recursos
 
 
 Tabla  guia_transferencia;
- +----+------------------+------------+------+-------------+------------+---------------------+
- | id | transferencia_id | usuario_id | tipo | obserbacion | aprobacion | fecha               |
- +----+------------------+------------+------+-------------+------------+---------------------+
- |  1 |                1 |          3 |    0 | todo ok     |          1 | 2024-08-02 00:00:00 |
- |  2 |                1 |          4 |    1 | llego bien  |          1 | 2024-08-02 00:00:00 |
+ +----+------------------+------------+--------  -+-------------+------------+---------------------+
+ | id | transferencia_id | usuario_id | tipo      | obserbacion | aprobacion | fecha               |
+ +----+------------------+------------+--------- -+-------------+------------+---------------------+
+ |  1 |                1 |          3 |Emisor     | todo ok     |          1 | 2024-08-02 00:00:00 |
+ |  2 |                1 |          4 |Recepcion  | llego bien  |          1 | 2024-08-02 00:00:00 |
  +----+------------------+------------+------+-------------+------------+---------------------+
 
 
@@ -1447,17 +1448,18 @@ Tabla  guia_transferencia;
 
       --Tabla transferencia:
       
-			+----+------------+---------------------+-------------+----------+-----------+
-			| id | usuario_id | fecha               | moviento_id | cod_guia |  origen   |     
-			+----+------------+---------------------+-------------+----------+-----------+
-			|  1 |          1 | 2024-08-02 00:00:00 |           1 | GUI23    |  1        |
-			+----+------------+---------------------+-------------+----------+-----------+
+			+----+------------+---------------------+-------------+----------+
+			| id | usuario_id | fecha               | moviento_id | cod_guia |        
+			+----+------------+---------------------+-------------+----------+
+			|  1 |          1 | 2024-08-02 00:00:00 |           1 | GUI23    |
+		    +----+------------+---------------------+-------------+----------+
 
                   
        --Tabla transferencia_compra 
 
            	+----+-----------------+------------+----------------------+
 			| id | tansferencia_id | compra_id  |  fecha               |   
+			+----+-----------------+------------+----------------------+
 			|  1 |       1         |    1       |  2024-08-02 00:00:00 |               
 			+----+---------------- +-----------------------------------+
 
@@ -1465,8 +1467,1108 @@ Tabla  guia_transferencia;
 
        --Tabla transferencia_alamacen  
 
+         	+----+-----------------+-------------+----------------------+
+			| id | tansferencia_id | almacen_id  |  fecha               |   
+			+----+-----------------+-------------+----------------------+
+			|  1 |       1         |    1        |  2024-08-02 00:00:00 |               
+			+----+---------------- +-----------------------------------+
 
 
 
 
+#######################  NORMALIZACION DE PROCESO DE REQUERIMIENTOS ORDEN COMPRA  ###################################
+
+
+
+         "borrador": Estado inicial cuando se crea el requerimiento.
+         "pendiente_aprobacion": Cuando se envía para aprobación.
+         "aprobado": Cuando todas las aprobaciones necesarias se han completado.
+         "rechazado": Si alguna aprobación es negativa.
+         "en_proceso": Cuando se inicia el proceso de obtención del recurso.
+         "en_compras": Si requiere una compra externa.
+         "en_almacen": Si se está gestionando con recursos internos.
+         "completado": Cuando el requerimiento se ha cumplido.
+         "cancelado": Si el requerimiento se cancela en cualquier punto del proceso.
+
+      
+       -- Tabla requerimientos_aprobacion
+
+         	+----+-----------------+-------------+----------------------+
+			| id | orden_compra_id | usuario_id  |  fecha               |   
+			+----+-----------------+-------------+----------------------+
+			|  1 |       1         |    1        |  2024-08-02 00:00:00 |               
+			+----+---------------- +-----------------------------------+
+            |  2 |       1         |    22       |  2024-08-02 00:00:00 |               
+			+----+---------------- +-----------------------------------+
+            |  3 |       1         |    7        |  2024-08-02 00:00:00 |               
+			+----+---------------- +-----------------------------------+
+
+     
+
+    --  Tabla requerimientos 
+         +----+--------------+----------------+------------+---------------------+---------------------+
+         | id | codigo_orden | presupuesto_id | estado     | fecha_ini           | fecha_fin           |                                                                                                   
+         +----+--------------+----------------+----------  +---------------------+---------------------+                                                                                                   
+         |  1 | 000A10       |              1 |  pendiente | 2024-07-02 00:00:00 | 2024-08-02 00:00:00 |                                                                                                   
+         +----+--------------+----------------+------------+---------------------+---------------------+     
+
+
+  -- estados orden_compra 
+    
+  
+Table requerimiento_recursos {
+  id integer [primary key, increment]
+  requerimiento_id int [ref: > requerimiento.id]
+  recurso_id int [ref: > recursos.id]
+  cantidad int
+  estado varchar // "pendiente", "parcialmente aprobado", "totalmente aprobado", "desaprobado"
+  tipo_solicitud varchar // "compra" o "almacén"
+}
+
+
+Table aprobacion_recurso {
+  id integer [primary key, increment]
+  requerimiento_recurso_id int [ref: > requerimiento_recursos.id]
+  cantidad_aprobada int // Cantidad aprobada en este registro
+  estado_aprobacion varchar // "aprobado", "desaprobado"
+  fecha_aprobacion datetime
+  usuario_id int [ref: > Usuario.id] // Usuario que aprueba o desaprueba
+}
+
+Table requerimiento_recursos {
+  id integer [primary key, increment]
+  requerimiento_id int [ref: > requerimiento.id]
+  recurso_id int [ref: > recursos.id]
+  cantidad int
+  cantidad_aprobada int // Almacena la cantidad aprobada (puede ser parcial)
+  estado varchar // "aprobado", "desaprobado", "pendiente"
+  tipo_solicitud varchar // "compra" o "almacén"
+}
+
+
+*
+//////////////PROCESO DE COMPRA /////////////////
+
+
+          --  Tabla requerimientos 
+         +----+--------------+----------------+------------+---------------------+---------+------------+-------------+
+         | id | codigo_orden | presupuesto_id | estado     | fecha_solicitud     | obra_1d |  sustento  | usuario_id  |                                                                      
+         +----+--------------+----------------+----------  +---------------------+---------+------------+ ------------+                                                                                     
+         |  1 | 000A10       |              1 |  pendiente | 2024-07-02 00:00:00 |   2     |este es ... |    3        |                                                                
+         +----+--------------+----------------+------------+---------------------+---------+------------+-------------+
+
+            --tabla requerimientos_recuso 
+
+           | id | requerimiento_id |  recurso_id | cantidad | cantidad_aprobada | costo_ref      | estado      |   fecha_limite |
+           ---------------------------------------------------------------------------------------------------
+           | 1 |  1               |   22         |  10      |    7              |   20           | aprobado    |   25/11/2024   |
+
+           --------------------------------------------------------------------------------------------------- 
+           | 2 |  1               |   23         | 30       |   15              |     23         | aprobado    |   25/11/2024   |
+           | 3 |  1               |   23         | 30       |   15              |     23         | desaprobado |   25/11/2024   |
+           --------------------------------------------------------------------------------------------------- 
+           | 4 | 1                |  123         |  15      |    15             |     30         |  aprobado   |   25/11/2024   |
+           ----------------------------------------------------------------------------------------------------
+
+           
+         --tabla solicitud_compra 
+
+
+           | id | requerimiento_id  |      fecha     |  usuario_id   |
+           ----------------------------------------------------------
+           | 1  |      1            |  14/10/2024    |    34         |  
+           ----------------------------------------------------------
+
+        --tabla  solicitud_compra_recurso 
+
+          | id |  solicitud_compra_id | recurso_id  |  cantidad | costo 
+          --------------------------------------------------------------+
+          | 1  |       1              |   22        |    7      | 23,5  |
+          --------------------------------------------------------------+
+          | 2  |       1              |   23        |  10       |  5    |   
+          | 2  |       1              |   123       |   15      |  35   |
+         ---------------------------------------------------------------+
+
+       -- Tabla cotizacion 
+
+          --------------------------------------------------------------------------------------
+          | id | cod | provedor_id | usuario_id | solicitud_compra_id | aprobacion |   fecha    |
+          --------------------------------------------------------------------------------------
+          | 1  |001  |   22        |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 2  |002  |   43        |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 3  |003  |   123       |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 4  |004  |    212      |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+
+          
+         -- tabla cotizacion_recurso
+           ------------------------------------------------------------------------------
+           |id | cotizacion_id  | recurso_id | cantidad |  costo_total  | costo unitario |
+           ------------------------------------------------------------------------------
+           | 1 |    1           |    22      |  7       |   54          |                |
+           | 2 |    1           |    23      |  10      |         23    |                |
+           | 3 |    2           |    22      |  7       |         23    |                |
+           | 5 |    3           |    123     |  10      |         20    |      2         |
+           | 6 |    4           |    123     |  5       |         10    |      2         |
+           -------------------------------------------------------------------------------
+
+
+        -- Tabla orden_compra 
+
+         -- --------------------------------------------------------------------------------------
+         | id | codigo |  estado   | usuario_id |   descripcion    |    Fecha   | cotizacion_id  |
+         ---------------------------------------------------------  -----------------------------
+         | 1  | cod21  | pendiente |   1        |   compra de impl | 24/11/2024 |     1          |
+         | 2  | cod22  | pendiente |   1        |  descrip ...     | 25/11/2024 |     2          |
+         | 3  | cod23  | pendiente |   1        |  costo comp      | 25/11/2024 |     3          |
+         | 4  | cod24  | pendiente |   1        |  costo comp      | 25/11/2024 |     4          |
+         | .  | .      |    .      |   .        |  ...             |     .      |     .          |
+         ----------------------------------------------------------------------------------------
+         
+       -- Tabla orden_compra_recurso
+
+         ----------------------------------------- ------------
+         | id | orden_compra | id_recurso | costo |  cantidad |
+         -----------------------------------------------------
+         | 1  |     1        |   23       |  23   |   10      |
+         | 2  |     2        |   22       |  23   |   7       |    
+         | 3  |     3        |   123      |  10   |   20      |
+         | 4  |     4        |   123      |  5    |   10      |
+         -----------------------------------------------------
+
+     -- tabla Compra 
+        ----------------------------------------------------
+        | id  |  orden_compra  |  id_usario  |    fecha     |     
+        ----------------------------------------------------
+        | 1   |     1          |    33       | 23-01-2011   |
+        | 2   |     2          |    34       | 2
+   
+     -- Tabla compra_recurso 
+     
+         ----------------------------------------- ------------
+         | id | compra_id    | id_recurso | costo |  cantidad |
+         -----------------------------------------------------
+         | 1  |     1        |   23       |  23   |   10      |
+         | 2  |     2        |   22       |  23   |   7       |    
+         | 3  |     3        |   123      |  10   |   20      |
+         | 4  |     4        |   123      |  5    |   10      |
+         -----------------------------------------------------
+
+
+
+     -- tabla_solicitud_almacen 
+
+           +---------------------------------------------------------------------------------------------------+
+           | id | requerimiento_id  |      fecha     |  usuario_id   | alamacen_origen_id | alamacen_origen_id |
+           +---------------------------------------------------------------------------------------------------+
+           | 1  |      1            |  14/11/2024    |    34         |      32            |       54           |
+           +---------------------------------------------------------------------------------------------------+
+
+        --tabla  solicitud_almacen_recurso 
+        
+          +-----------------------------------------------------+
+          | id |  solicitud_almacen_id| recurso_id  |  cantidad |
+          ------------------------------------------------------+
+          | 1  |       1              |   22        |    7      |
+          ------------------------------------------------------+
+          | 2  |       1              |   23        |   10      |      
+          | 3  |       1              |   123       |   15      |
+          +-----------------------------------------------------+
+        
+
+///////////////////////////////////////////////////Proceso compra y almacenamiento ////////////////////////////////////////////////////////
+
+	                                                Requerimiento 
+										                 | 
+										                 |
+
+                                                 pre_solicitud_almacen  <---recursos
+										                 |
+							         |--------------------------------------------|			             
+                  
+		   Recursos --->      Solicitud_Compra                                  
+                                     |                                            |   
+
+		                             |                                             Solicitud_Almacen <---recursos    
+                                     |                                            |   
+
+           Recursos --->        Cotización                                        | 
+    
+                                     |                                            |
+          
+          Recursos --->          Orden_compra                                     |
+
+                                     |                                            |
+          Recursos --->           Compra 
+                                                                                  |
+                                     |
+                                                                                  |
+                                     |
+                                                                                  |
+                                     |--------------> Transferencia <-------------|    
+                                                          
+                                                        |  |
+                                                        |  |                                 
+                                                        |  |
+                                                        |  |
+                                      <  ---------------|  |-------------------->
+                  Recursos  -->    Almacen                                        Obra ---Bodega  <-- Recursos 
+                                      |
+                                  Centro_costos 
+                                       
+                                                           
+
+                                       --Tabla transferencia:
+
+		        -- tabla moviento 		        
+		       +-----------------------------------------------+-------+
+		       | id |        nombre              | descripción | tipo  |
+		       + ----------------------------------------------+-------+
+		       |  1 |Salida recurso              |             |entrada|
+		       |  2 |devolución recursos almacen |             |salida |
+		       |  3 |Salida descuento            |             |       |
+		       |  4 |devolución descuento        |             |       |
+		       |  5 |Prestamos personal          |             |       |
+		       |  6 |Devolución prestamo persona |             |       |
+		       |  7 |Transferencia  otras obras  |             |       |
+		       |  8 |Recepción de trasferencia o.|             |       |
+		       |  9 |Trasnferencia bodega        |             |       |
+		       | 10 |Reingreso bodega            |             |       |
+		       | 11 |Ingreso obra                | ...         |salida |
+		       | 12 |Ingreso recurso             | ..          |entrada|
+               +- -------------------------------+-------------+-------+
+      
+             -- tabla Transferencia              
+			+----+------------+---------------------+-------------+
+			| id | usuario_id | fecha               | moviento_id |  
+			+----+------------+---------------------+-------------+
+			|  1 |     1      | 2024-08-02 00:00:00 |      1      |                 
+		    +----+------------+---------------------+-------------+
+            |  2 |      4     | 2024-08-02 00:00:00 |     11      | 
+            ------------------------------------------------------+
+
+             																																																																									
+              --- Tabla  guia_transferencia
+	       +----+------------------+------------+------------- -- -+--------------+-------------+------------------------+
+	       | id | transferencia_id | Cod_guia   |       usuario_id |   tipo       | observacion |   fecha                |
+	       +----+------------------+------------+---------------- -+--------------+-------------+------------------------+
+	       |  1 |                1 | GUI123     |               3  |   Emisor     | todo ok     | 2024-08-02 00:00:00    |
+	       |  2 |                1 | GUI123     |               4  |   Receptor   | llego bien  |   2024-08-02 00:00:00  |
+	       |  3 |                2 | GUI124     |               23 |   Emisor     | ok          |  2024-08-02 00:00:00   |
+	       |  4 |                2 | GUI124     |               67 |   Receptor   | ok          | 2024-08-02 00:00:00    |
+	       +----+------------------+------------+------------------+--------------+-------------+------------------------+
+                        
+              --- Tabla transferencia_compra 
+           	+----+-----------------+-------------------+----------------------+-----------------+
+			| id | tansferencia_id | orden_compra _id  |  fecha               |   transport_id  |
+			+----+-----------------+-------------------+----------------------+-----------------+
+			|  1 |       10        |    1              |  2024-08-02 00:00:00 |     1           |
+			+----+---------------- +-------------------+----------------------+-----------------+
+
+            --- Tabla transporte 
+           
+           	+----+------------------+---------------------+
+			| id | denominacion     | Descripcion         |       
+			+----+------------------+---------------------+
+			|  1 | movilidad_propia |  fdfd ...           |                            
+			+----+------------------+---------------------+
+            |  2 | ecomienda        |  fdfd ...           |                            
+            +----+------------------+---------------------+
+
+                        
+             ---- Tabla transferencia_alamacen  
+         	+----+-----------------+-------------+----------------------+------------+
+			| id | tansferencia_id | almacen_id  |  fecha               |   tipo     |
+			+----+-----------------+-------------+----------------------+------------+
+			| 1  |       1         |    1        |  2024-08-02 00:00:00 |   origen   |  
+			+----+---------------- +------------------------------------+------------+
+            | 2  |      1          |    23       |  2024-08-02 00:00:00 |  destino   |
+            +----+-----------------+-------------+----------------------+-------------
+            | 3  |       2         |     1       |  2024-08-02 00:00:00 |  origen    |
+            +----+-----------------+-------------+----------------------+-------------
+                                   
+            -- Tabla transferencia_uso_obra 
+
+           	+----+-----------------+-------------------+----------------------+----------+
+			| id | tansferencia_id |      obra_id      |  fecha               |  tipo    |
+			+----+-----------------+-------------------+----------------------+----------+
+			|  1 |       2         |    1              |  2024-08-02 00:00:00 | destino  |            
+			+----+---------------- +-------------------+----------------------+----------+
+           
+          
+           --Transferencia_uso_obra_recursos 
+           +-----+---------------------------+--------------+------------+ 
+           | id  |transferencia_uso_obra_id   | recurso_id  |  cantidad  |
+           +-----+------------------------- --+-------------+------------+
+           | 1   |      1                     |    129      |     2      | 
+           -------------------------------------------------------------+ 
+           | 2   |      1                     |    135      |     4      |  
+           -------------------------------------------------------------+-
+           
+                                                     
+           ----Transferencia_almacen_recursos 
+           +-----+---------------------------+-------------+------------+ 
+           | id  |transferencia_almacen_id   | recurso_id  |  cantidad  |
+           +-----+---------------------------+-------------+------------+      
+           | 1   |      1                    |    23       |     2      |
+           -------------------------------------------------------------+ 
+           | 2   |      1                    |    35       |     4      |
+           -------------------------------------------------------------+
+           | 3   |      1                    |    1        |      5     |
+           +------------------------------------------------------------+
+           | 4   |      2                    |    23       |     2      |
+           -------------------------------------------------------------+ 
+           | 5   |      2                    |    35       |     4      |
+           -------------------------------------------------------------+
+           | 6   |      2                    |    1        |      5     |
+           +-----+---------------------------+-------------+------------+
+           | 7   |      3                    |    129      |     2      | 
+           -------------------------------------------------------------+ 
+           | 8   |      3                    |    135      |     4      |  
+           -------------------------------------------------------------+
+           
+
+         --- Tabla Almacen
+          +------+--------------+--------------+-----------+-------------------+--------+------------+
+          |  id  | nombre       | ubicacion    | direccion | tipo_almacend_id  | estado |  obra_id   |
+          +------+--------------+--------------+-----------+-------------------+--------+------------+
+          |  1   | CASUARINAS   | 12.000,74.00 | Av 234    |      1            | activo |     1      |
+          -------------------------------------------------------------------------------------------+
+          |  2   | MONT         | 12.000,78.00 | Av 234    |      1            | activo |     1      |
+          -------------------------------------------------------------------------------------------+
+          |  3   | CENTRAL      | 12.000,78.00 | Av 234    |      1            | activo |    NULL    |
+          -------------------------------------------------------------------------------------------+
+
+        --- Tabla recurso_almacen
+
+           +-----+--------------+------------+-----------+---------+------------+ 
+           | id  | almacen_id   | recurso_id |  cantidad |  costo  | bodega_id  |
+           +-----+--------------+------------+-----------+---------+------------+
+           |   1 |    1         |      145   |    20     |   10.22 |    1       |
+           ---------------------------------------------------------------------+
+           |  2  |    1         |     234    |    1      |  320.5  |     2      |
+           ---------------------------------------------------------------------+
+           |  3  |    1         |    22      |    2      |  45.00  |    1       |
+           ---------------------------------------------------------------------+
+           
+           
+       --- Tabla Obra_Almacen
+
+           +-----+---------------+--------------         
+           | id  |  alamacen_id  |  obra_id    |
+           -------------------------------------
+           | 1   |       1       |      22     |
+           ------------------------------------
+           | 2   |       2       |      22     |
+           ------------------------------------
+
+
+      --- Tabla centro_costos 
+
+          +----+---------------+-----------+
+          | id |   nombre      |  tipo     |
+          +--- +---------------------------+
+          | 1  |   Operaciones | Operativo |
+          | 2  |   Logistica   | Administrt
+          ----------------------------------
+
+     --- Tabla almacen_centro_costos
+
+         +----+------------------+-------------+---------+--------------+-------+  
+         | id | centro_costos_id | almaced_id  | Mermac  | Depreciacion | otros |  
+         ------------------------+-------------+--------------------------------+
+         | 1  |       1          |      1      | 1200.00 |  20.00       | 20.00 |
+         | 2  |       2          |      1      | 300.00  |  14.00       | 1.00  |  
+         -----------------------------------------------------------------------
+
+
+     -- Tabla tipo_almacen 
+
+         +----+--------------+
+         | id | nombre       |
+         --------------------+
+         | 1  |  principal   |
+         | 2  |  de_obra     |
+         | 3  | sub_almacen  |
+         --------------------
+
+    --- Bodega  
+    
+     +---------------------------------------+---------------------------------------+ 
+     | id | codigo   | nombre                | descripcion                           |
+     +----+----------+-----------------------+---------------------------------------+
+     | 1  | CU-MAC4  | Nobre e obra          | Son   Recursos nuevos                 |
+     | 2  | BDG-MAC4 | Bodega                |  Recursos usadas                      |
+     | 3  | BTI-MAC4 | Bodega TI             |  Recurso tecnologico , laptops, etc   |
+     | 4  | VEL-MAC4 | Equipos de combustion |                                       |
+     +---------------------------------------+-------------------------------------- +  
+
+         
+   ////estrucutrura dbml              
+
+   Table movimiento {
+     id integer [primary key]
+     nombre varchar
+     descripcion varchar
+    }
+   
+   Table transferencia {
+     id integer [primary key]
+     usuario_id integer
+     fecha datetime
+     movimiento_id integer
+   }
+   
+   Table guia_transferencia {
+     id integer [primary key]
+     transferencia_id integer
+     cod_guia varchar
+     usuario_id integer
+     tipo varchar
+     observacion varchar
+     fecha datetime
+   }
+   
+   Table transferencia_compra {
+     id integer [primary key] 
+     transferencia_id integer
+     orden_compra_id integer
+     fecha datetime
+   }
+   
+   Table transferencia_almacen {
+     id integer [primary key]
+     transferencia_id integer
+     almacen_id integer
+     fecha datetime
+     tipo varchar
+   }
+   
+   Table transferencia_uso_obra {
+     id integer [primary key]
+     transferencia_id integer
+     obra_id integer
+     fecha datetime
+     tipo varchar
+   }
+   
+   Table transferencia_uso_obra_recursos {
+     id integer [primary key]
+     transferencia_uso_obra_id integer
+     recurso_id integer
+     cantidad integer
+   }
+   
+   Table transferencia_almacen_recursos {
+     id integer [primary key]
+     transferencia_almacen_id integer
+     recurso_id integer
+     cantidad integer
+   }
+   
+   Table almacen {
+     id integer [primary key]
+     nombre varchar
+     ubicacion varchar
+     direccion varchar
+     tipo_almacen_id integer
+     estado varchar
+     obra_id integer
+   }
+   
+   Table recurso_almacen {
+     id integer [primary key]
+     almacen_id integer
+     recurso_id integer
+     cantidad integer
+     costo decimal
+   }
+   
+   Table obra_almacen {
+     id integer [primary key]
+     almacen_id integer
+     obra_id integer
+   }
+   
+   Ref: transferencia.movimiento_id > movimiento.id
+   Ref: guia_transferencia.transferencia_id > transferencia.id
+   Ref: transferencia_compra.transferencia_id > transferencia.id
+   Ref: transferencia_almacen.transferencia_id > transferencia.id
+   Ref: transferencia_uso_obra.transferencia_id > transferencia.id
+   Ref: transferencia_uso_obra_recursos.transferencia_uso_obra_id > transferencia_uso_obra.id
+   Ref: transferencia_almacen_recursos.transferencia_almacen_id > transferencia_almacen.id
+   Ref: recurso_almacen.almacen_id > almacen.id
+   Ref: obra_almacen.almacen_id > almacen.id
+
+   ///////////  Optimizacion Cuarta forma normal 
+
+
+
+       -- Tabla cotizacion 
+
+          --------------------------------------------------------------------------------------
+          | id | cod | provedor_id | usuario_id | solicitud_compra_id | aprobacion |   fecha    |
+          --------------------------------------------------------------------------------------
+          | 1  |001  |   22        |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 2  |002  |   43        |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 3  |003  |   123       |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+          | 4  |004  |    212      |  22         |   1                | pendiente  | 23/11/2024 |
+          --------------------------------------------------------------------------------------
+
+          
+         -- tabla cotizacion_recurso
+           ------------------------------------------------------------------------------
+           |id | cotizacion_id  | recurso_id | cantidad |  costo_total  | costo unitario |
+           ------------------------------------------------------------------------------
+           | 1 |    1           |    22      |  7       |   54          |                |
+           | 2 |    1           |    23      |  10      |         23    |                |
+           | 3 |    2           |    22      |  7       |         23    |                |
+           | 5 |    3           |    123     |  10      |         20    |      2         |
+           | 6 |    4           |    123     |  5       |         10    |      2         |
+           -------------------------------------------------------------------------------
+
+
+        -- Tabla orden_compra 
+
+         -- --------------------------------------------------------------------------------------
+         | id | codigo |  estado   | usuario_id |   descripcion    |    Fecha   | cotizacion_id  |
+         ---------------------------------------------------------  -----------------------------
+         | 1  | cod21  | pendiente |   1        |   compra de impl | 24/11/2024 |     1          |
+         | 2  | cod22  | pendiente |   1        |  descrip ...     | 25/11/2024 |     2          |
+         | 3  | cod23  | pendiente |   1        |  costo comp      | 25/11/2024 |     3          |
+         | 4  | cod24  | pendiente |   1        |  costo comp      | 25/11/2024 |     4          |
+         | .  | .      |    .      |   .        |  ...             |     .      |     .          |
+         ----------------------------------------------------------------------------------------
+         
+       -- Tabla orden_compra_recurso
+
+         ----------------------------------------- ------------
+         | id | orden_compra | id_recurso | costo |  cantidad |
+         -----------------------------------------------------
+         | 1  |     1        |   23       |  23   |   10      |
+         | 2  |     2        |   22       |  23   |   7       |    
+         | 3  |     3        |   123      |  10   |   20      |
+         | 4  |     4        |   123      |  5    |   10      |
+         -----------------------------------------------------
+
+     -- tabla Compra 
+        ----------------------------------------------------
+        | id  |  orden_compra  |  id_usario  |    fecha     |     
+        ----------------------------------------------------
+        | 1   |     1          |    33       | 23-01-2011   |
+        | 2   |     2          |    34       | 2
+   
+     -- Tabla compra_recurso 
+     
+         ----------------------------------------- ------------
+         | id | compra_id    | id_recurso | costo |  cantidad |
+         -----------------------------------------------------
+         | 1  |     1        |   23       |  23   |   10      |
+         | 2  |     2        |   22       |  23   |   7       |    
+         | 3  |     3        |   123      |  10   |   20      |
+         | 4  |     4        |   123      |  5    |   10      |
+         -----------------------------------------------------
+
+
+
+-- tabla moviento 		        
+		       +-----------------------------------------------+-------+
+		       | id |        nombre              | descripción | tipo  |
+		       + ----------------------------------------------+-------+
+		       |  1 |Salida recurso              |             |entrada|
+		       |  2 |devolución recursos almacen |             |salida |
+		       |  3 |Salida descuento            |             |       |
+		       |  4 |devolución descuento        |             |       |
+		       |  5 |Prestamos personal          |             |       |
+		       |  6 |Devolución prestamo persona |             |       |
+		       |  7 |Transferencia  otras obras  |             |       |
+		       |  8 |Recepción de trasferencia o.|             |       |
+		       |  9 |Trasnferencia bodega        |             |       |
+		       | 10 |Reingreso bodega            |             |       |
+		       | 11 |Ingreso obra                | ...         |salida |
+		       | 12 |Ingreso recurso             | ..          |entrada|
+               +- -------------------------------+-------------+-------+
+      
+
+
+ -- tabla Transferencia
+                
+			+----+------------+---------------------+-------------+
+			| id | usuario_id | fecha               | moviento_id |  
+			+----+------------+---------------------+-------------+
+			|  1 |     1      | 2024-08-02 00:00:00 |      11      |                 
+		    +----+------------+---------------------+-------------+
+            |  2 |      4     | 2024-08-02 00:00:00 |     11      | 
+            ------------------------------------------------------+
+           																																																																									
+              --- Tabla  guia_transferencia
+	       +----+------------------+------------+------------- -- -+--------------+-------------+------------------------+
+	       | id | transferencia_id | Cod_guia   |       usuario_id |   tipo       | observacion |   fecha                |
+	       +----+------------------+------------+---------------- -+--------------+-------------+------------------------+
+	       |  1 |                1 | GUI123     |               3  |   Emisor     | todo ok     | 2024-08-02 00:00:00    |
+	       |  2 |                1 | GUI123     |               4  |   Receptor   | llego bien  |   2024-08-02 00:00:00  |
+	       |  3 |                2 | GUI124     |               23 |   Emisor     | ok          |  2024-08-02 00:00:00   |
+	       |  4 |                2 | GUI124     |               67 |   Receptor   | ok          | 2024-08-02 00:00:00    |
+	       +----+------------------+------------+------------------+--------------+-------------+------------------------+
+
+                    --- Tabla transferencia_detalle  
+           	+----+-----------------+-------------------+----------------------+--------- -+--------------+
+			| id | tansferencia_id | referencia _id    |  fecha               | tipo      | referencia   |
+			+----+-----------------+-------------------+----------------------+-----------+--------------+
+			|  1 |       1         |    1              |  2024-08-02 00:00:00 | origen    | compra       |              
+			+----+---------------- +-------------------+----------------------+-----------+--------------+
+        	| 2  |       1         |    1              |  2024-08-02 00:00:00 |   origen  | almacen      |  
+			+----+---------------- +------------------------------------+-----------------+--------------+
+            | 3  |       1         |    3              |  2024-08-02 00:00:00 |  destino  | almacen      |
+            +----+-----------------+-------------------+----------------------+--------------------------+
+            | 4  |       2         |    11             |  2024-08-02 00:00:00 |  origen   | almacen      |
+            +----+-----------------+-------------------+----------------------+-----------+--------------+
+			| 5  |       2         |    1              |  2024-08-02 00:00:00 | destino   |   obra       |       
+			+----+---------------- +-------------------+----------------------+-----------+--------------+
+
+             
+           --Transferencia_recursos 
+           +-----+---------------------------+--------------+------------+ 
+           | id  |transferencia_detallo      | recurso_id   |  cantidad  |
+           +-----+------------------------- -+------------ -+------------+
+           | 1   |      4                    |    129       |     1      | 
+           --------------------------------------------------------------+ 
+           | 2   |      4                    |    135       |     4      |  
+           --------------------------------------------------------------+
+           | 3   |      2                    |    23        |     2      |
+           --------------------------------------------------------------+ 
+           | 4   |      2                    |    35        |     4      |
+           --------------------------------------------------------------+
+           | 5   |      3                    |    1         |      5     |
+           +-------------------------------------------------------------+
+           | 6   |      3                    |    23        |     2      |
+           --------------------------------------------------------------+ 
+           | 7   |      2                    |    35        |     4      |
+           --------------------------------------------------------------+
+           | 8   |      2                    |    1         |      5     |
+           +-----+---------------------------+------------ -+------------+
+           | 9   |      5                    |    129       |     2      | 
+           --------------------------------------------------------------+ 
+           | 10  |      5                    |    135       |     4      |  
+           --------------------------------------------------------------+
+           | 11  |      1                    |    129       |     2      | 
+           --------------------------------------------------------------+ 
+           | 12  |      1                    |    135       |     4      |  
+           --------------------------------------------------------------+
+
+                  
+         --- Tabla Almacen
+          +------+--------------+--------------+-----------+-------------------+--------+------------+
+          |  id  | nombre       | ubicacion    | direccion | tipo_almacend_id  | estado |  obra_id   |
+          +------+--------------+--------------+-----------+-------------------+--------+------------+
+          |  1   | CASUARINAS   | 12.000,74.00 | Av 234    |      1            | activo |     1      |
+          -------------------------------------------------------------------------------------------+
+          |  2   | MONT         | 12.000,78.00 | Av 234    |      1            | activo |     1      |
+          -------------------------------------------------------------------------------------------+
+          |  3   | CENTRAL      | 12.000,78.00 | Av 234    |      1            | activo |    NULL    |
+          -------------------------------------------------------------------------------------------+
+
+        --- Tabla recurso_almacen
+
+           +-----+--------------+------------+-----------+---------+------------+
+           | id  | almacen_id   | recurso_id |  cantidad |  costo  | bodega_id  |
+           +-----+--------------+------------+-----------+---------+------------+
+           |   1 |    1         |     145    |    20     |   10.22 |     1      |
+           --------------------------------------------------------+------------+
+           |  2  |    1         |     234    |    1      |  320.5  |     3      |
+           --------------------------------------------------------+------------+
+           |  3  |    1         |     22     |    2      |  45.00  |     1      |
+           --------------------------------------------------------+------------+
+           
+           
+       --- Tabla Obra_Almacen
+
+           +-----+---------------+--------------         
+           | id  |  alamacen_id  |  obra_id    |
+           -------------------------------------
+           | 1   |       1       |      22     |
+           ------------------------------------
+           | 2   |       2       |      22     |
+           ------------------------------------
+
+
+      --- Tabla centro_costos 
+
+          +----+---------------+-----------+
+          | id |   nombre      |  tipo     |
+          +--- +---------------------------+
+          | 1  |   Operaciones | Operativo |
+          | 2  |   Logistica   | Administrt
+          ----------------------------------
+
+     --- Tabla almacen_centro_costos
+
+         +----+------------------+-------------+---------+--------------+-------+  
+         | id | centro_costos_id | almaced_id  | Mermac  | Depreciacion | otros |  
+         ------------------------+-------------+--------------------------------+
+         | 1  |       1          |      1      | 1200.00 |  20.00       | 20.00 |
+         | 2  |       2          |      1      | 300.00  |  14.00       | 1.00  |  
+         +----------------------------------------------------------------------+
+
+
+     -- Tabla tipo_almacen 
+         +----+--------------+
+         | id | nombre       |
+         --------------------+
+         | 1  |  principal   |
+         | 2  |  de_obra     |
+         | 3  | sub_almacen  |
+         --------------------
+
+    --- Bodega  
+    
+     +---------------------------------------+---------------------------------------+ 
+     | id | codigo   | nombre                | descripcion                           |
+     +----+----------+-----------------------+---------------------------------------+
+     | 1  | CU-MAC4  | Nobre e obra          | Son   Recursos nuevos                 |
+     | 2  | BDG-MAC4 | Bodega                |  Recursos usadas                      |
+     | 3  | BTI-MAC4 | Bodega TI             |  Recurso tecnologico , laptops, etc   |
+     | 4  | VEL-MAC4 | Equipos de combustion |                                       |
+     +---------------------------------------+-------------------------------------- +  
+
+
+        --- Tabla recurso_obra
+
+           +-----+--------------+------------+-----------+---------+------------+ 
+           | id  | obra_id      | recurso_id |  cantidad |  costo  | bodega_id  |
+           +-----+--------------+------------+-----------+---------+------------+
+           |  1  |    1         |      145   |    20     |   10.22 |    1       |
+           ---------------------------------------------------------------------+
+           |  2  |    1         |      234   |    1      |  320.5  |    2       |
+           ---------------------------------------------------------------------+
+           |  3  |    1         |      22    |    2      |  45.00  |    1       |
+           ---------------------------------------------------------------------+
+
+
+Table tabla_solicitud_almacen {
+  id integer [primary key, increment]
+  requerimiento_id integer [ref: > requerimiento.id]
+  fecha datetime
+  usuario_id integer [ref: > usuario.id]
+  almacen_origen_id integer [ref: > almacen.id]
+  almacen_destino_id integer [ref: > almacen.id]
+}
+
+          
+table comprobante_cotizacion{
+  id integer [primary key, increment]
+  cotizacion_id: intenger [ref: > cotizacion.id]
+  files varchar
+  fecha date
+}
+
+   
+Table cotizacion [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  cod varchar
+  provedor_id integer [ref: > proveedor.id]
+  usuario_id integer [ref: > usuario.id]
+  solicitud_compra_id integer [ref: > solicitud_compra.id]
+  aprobacion varchar
+  fecha date
+}
+
+
+Table cotizacion_recurso [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  cotizacion_id integer [ref: > cotizacion.id]
+  recurso_id integer [ref: > recurso.id]
+  cantidad integer
+  costo_total decimal
+  costo_unitario decimal
+}
+
+
+Table orden_compra [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  codigo varchar
+  estado varchar
+  usuario_id integer [ref: > usuario.id]
+  descripcion text
+  fecha date
+  cotizacion_id integer [ref: > cotizacion.id]
+}
+
+
+Table orden_compra_recurso [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  orden_compra_id integer [ref: > orden_compra.id]
+  recurso_id integer [ref: > recurso.id]
+  costo decimal
+  cantidad integer
+}
+
+Table compra [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  orden_compra_id integer [ref: > orden_compra.id]
+  usuario_id integer [ref: > usuario.id]
+  fecha date
+}
+
+Table compra_recurso [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  compra_id integer [ref: > compra.id]
+  recurso_id integer [ref: > recurso.id]
+  costo decimal
+  cantidad integer
+}
+
+Table transferencia [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  usuario_id integer [ref: > usuario.id]
+  fecha datetime
+  movimiento_id integer [ref: > movimiento.id]
+}
+
+Table guia_transferencia [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  transferencia_id integer [ref: > transferencia.id]
+  cod_guia varchar
+  usuario_id integer [ref: > usuario.id]
+  tipo varchar
+  observacion text [note : ]
+  fecha datetime
+}
+
+
+Table transferencia_detalle [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  transferencia_id integer [ref: > transferencia.id]
+  referencia_id integer
+  fecha datetime
+  tipo varchar [note :'origen, destino']
+  referencia varchar [note : 'compra, almacen, obra']
+}
+
+
+Table transferencia_recursos [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  transferencia_detalle_id integer [ref: > transferencia_detalle.id]
+  recurso_id integer [ref: > recurso.id]
+  cantidad integer
+}
+
+
+Table almacen [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  nombre varchar
+  ubicacion varchar
+  direccion varchar
+  tipo_almacen_id integer [ref: > tipo_almacen.id]
+  estado varchar
+  obra_id integer [ref: > obra.id]
+}
+
+Table recurso_almacen [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  almacen_id integer [ref: > almacen.id]
+  recurso_id integer [ref: > recurso.id]
+  cantidad integer
+  costo decimal
+}
+
+-----------------------------------------------|-----------------------------
+Table obra_almacen [headercolor:#0040ff] {     |
+  id integer [primary key, increment]          |
+  almacen_id integer [ref: > almacen.id]       |
+  obra_id integer [ref: > obra.id]             |
+}                                              |
+-----------------------------------------------|
+
+Table centro_costos [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  nombre varchar
+  tipo varchar
+}
+
+
+
+Table almacen_centro_costo [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  centro_costos_id integer [ref: > centro_costos.id]
+  almacen_id integer [ref: > almacen.id]
+  merma decimal
+  depreciacion decimal
+  otros decimal
+}
+
+
+
+Table tipo_almacen [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  nombre varchar
+}
+
+Table bodega [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  codigo varchar
+  nombre varchar
+  descripcion text
+}
+
+
+Table recurso_obra [headercolor:#0040ff] {
+  id integer [primary key, increment]
+  obra_id integer [ref: > obra.id]
+  recurso_id integer [ref: > recurso.id]
+  cantidad integer
+  costo decimal
+  bodega_id integer [ref: > bodega.id]
+}
+
+
+/////////////////////// Nomalizacon pre seleccion recurso alamacen //////////////////////////////////////////////
+
+
+
+          --  Tabla requerimientos 
+         +----+--------------+----------------+------------+---------------------+---------+------------+-------------+
+         | id | codigo_orden | presupuesto_id | estado     | fecha_solicitud     | obra_1d |  sustento  | usuario_id  |                                                                      
+         +----+--------------+----------------+----------  +---------------------+---------+------------+ ------------+                                                                                     
+         |  1 | 000A10       |              1 |  pendiente | 2024-07-02 00:00:00 |   2     |este es ... |    3        |                                                                
+         +----+--------------+----------------+------------+---------------------+---------+------------+-------------+
+
+            --tabla requerimientos_recuso 
+
+           | id | requerimiento_id |  recurso_id | cantidad | cantidad_aprobada | costo_ref      | estado      |   fecha_limite |
+           ---------------------------------------------------------------------------------------------------
+           | 1 |  1               |   22         |  10      |    7              |   20           | aprobado    |   25/11/2024   |
+           --------------------------------------------------------------------------------------------------- 
+           | 2 |  1               |   23         | 30       |   15              |     23         | aprobado    |   25/11/2024   |
+           | 3 |  1               |   23         | 30       |   15              |     23         | desaprobado |   25/11/2024   |
+           --------------------------------------------------------------------------------------------------- 
+           | 4 | 1                |  123         |  15      |    15             |     30         |  aprobado   |   25/11/2024   |
+           ----------------------------------------------------------------------------------------------------
+
+
+
+
+     -- tabla_pre_solicitud_almacen 
+
+           +-----------------------------------------------------------------------+
+           | id | requerimiento_id  |      fecha     |  usuario_id   | alamacen_id |
+           +-----------------------------------------------------------------------+
+           | 1  |      1            |  14/11/2024    |    27         |      32     |      
+           +-----------------------------------------------------------------------+
+           | 2  |      1            |  14/11/2024    |    27         |      25     |      
+           +-----------------------------------------------------------------------+
+
+
+        --tabla  solicitud_pre_almacen_recurso 
+        
+          +----------------------------------------------------------+
+          | id | pre_solicitud_almacen_id | recurso_id  |  cantidad  |
+          -----------------------------------------------------------+
+          | 1  |       1                 |    22        |    3       |
+          -----------------------------------------------------------+
+          | 2  |       1                 |     23        |   10      |      
+          | 3  |       2                 |      22       |   4       |
+          | 4  |       2                 |       23      |   14      |
+          +----------------------------------------------------------+
+
+
+
+
+     -- tabla_solicitud_almacen 
+
+           +---------------------------------------------------------------------------------------------------+
+           | id | requerimiento_id  |      fecha     |  usuario_id   | alamacen_origen_id | alamacen_origen_id |
+           +---------------------------------------------------------------------------------------------------+
+           | 1  |      1            |  14/11/2024    |    34         |      32            |       54           |
+           +---------------------------------------------------------------------------------------------------+
+
+        --tabla  solicitud_almacen_recurso 
+        
+          +-----------------------------------------------------+
+          | id |  solicitud_almacen_id| recurso_id  |  cantidad |
+          ------------------------------------------------------+
+          | 1  |       1              |   22        |    7      |
+          ------------------------------------------------------+
+          | 2  |       1              |   23        |   10      |      
+          | 3  |       1              |   123       |   15      |
+          +-----------------------------------------------------+
+
+
+
+
+###################
+
+
+Para resolver este problema donde `id` aparece como null y necesitas que tome el valor de `_id`, hay varias soluciones posibles. Aquí te muestro dos aproximaciones:
+
+1. Primera solución - Modificar el servicio para mapear los campos:
+
+```typescript
+// En tu AlmacenRecursoService
+async findByRecursoId(recursoId: string) {
+    const recursos = await this.collection.find({ recurso_id: new ObjectId(recursoId) }).toArray();
+    return recursos.map(recurso => ({
+        ...recurso,
+        id: recurso._id.toString(), // Convierte _id a id
+        recurso_id: recurso.recurso_id.toString(),
+        almacen_id: recurso.almacen_id.toString()
+    }));
+}
+```
+
+2. Segunda solución - Agregar un resolver específico para el campo id:
+
+```typescript
+const resolvers: IResolvers = {
+    AlmacenRecurso: {
+        id: (parent) => parent._id.toString(), // Resolver específico para el campo id
+    },
+    Query: {
+        // ... resto de tus resolvers ...
+    },
+    Mutation: {
+        // ... resto de tus mutations ...
+    }
+};
+```
+
+3. También podrías modificar tu schema GraphQL para manejar mejor los IDs:
+
+```graphql
+type AlmacenRecurso {
+    id: ID! @id # Si usas alguna directiva para IDs
+    recurso_id: ID!
+    cantidad: Int
+    almacen_id: ID!
+    costo: Float
+    nombre_almacen: String
+}
+```
+
+La segunda solución (agregar un resolver específico) es probablemente la más limpia y flexible. Te permite mantener la lógica de transformación en el nivel del resolver sin modificar tu capa de servicio.
+
+Si estás usando MongoDB con Mongoose, también podrías considerar configurar el schema de Mongoose para que transforme automáticamente `_id` a `id` en las consultas:
+
+```typescript
+const schema = new Schema({
+    // ... otros campos
+}, {
+    toJSON: { 
+        virtuals: true,
+        transform: function(doc, ret) {
+            ret.id = ret._id.toString();
+            delete ret._id;
+            return ret;
+        }
+    }
+});
+```
+
+Cualquiera de estas soluciones debería resolver tu problema. La elección dependerá de tu arquitectura específica y preferencias.
 

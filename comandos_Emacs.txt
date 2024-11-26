@@ -324,5 +324,5 @@ EJECUTAR PROGRAMAS DE TERMINAL
 
 M-x "term" --> ejeuctar terminal y puedes usar programas en terminal
 exit --> escibir  en el terminal((en el mismo buffer terminal)) para salir 
-
+C-x C-c --> salir del modo terminal 
 

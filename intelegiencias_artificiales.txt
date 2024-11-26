@@ -50,3 +50,27 @@ CHAT GEMINI EN TERMINAL CON NODE
 Paso 1:  Tener instalado node , un version mayor a 18 (puedes usar nvm)
 Paso 2:  Ejecutar el segundo comando : npx gen-ai-chat@latest
 Paso 3:  Empezar a chatear con el comando npx gen-ai-chat "Hola"
+
+INSTALAR AIDER 
+
+pip3 install --upgrade aider-chat
+
+Paso 1 : instalacion 
+    python3 -m pip install -U aider-chat
+     si hay problemas instalar con pipx 
+     pipx install aider-chat
+- aider with Gemini    
+Paso 2 : setear id apis ( en este caso gemini)
+          export GEMINI_API_KEY=AIzaSyADADMaCW9VR7MdsYXKf-0xFozUbCeT0DU
+Paso 3 : Ejecutar agente 
+         aider --model gemini/gemini-1.5-pro-latest
+- aider with Deep seek 
+
+Paso 2 : export DEEPSEEK_API_KEY=sk-e5b80b32fcea457fb9426ee4ac2a3e31
+paso 3 : aider --deepseek
+
+  -aider with Grok 
+ 
+Paso 2 : export XAI_API_KEY=xai-LnDGR8tc3xO9svTjmswv1ZePQpQBzr8pwdtXqYQeODSULiY0RLuwk1NQlZSeeOldgQ3ewk9tvCspfHD6
+Pass 3 : aider --model xai/grok-beta
+       

@@ -1,9 +1,18 @@
- Ventana de comandos 
+Teclas rapidas:  
 
 ctrl+e → abrir ventana de comandos 
+ctrl+b → shell mode 
 ctrl+t →nueva pestaña 
+ctrl+repag o ctrl+avpag → navegar entre pestañas
+alt+, o alt+. → navegar entre pestañas   
+alt+ { o alt+ } → avanzar entre parrafos arriba y abajo  
 ctrl+f  → buscar para siguiente flecha arriba 
-Comandos 
+ctrl+l  → goto line
+ctr+ w  → desplazarse entre divisiones 
+
+Comandos:
+
+open nombre_archivo  →  abrir un archvio 
 set colorscheme twilight →establecer thema
 
       monokai  (default)
@@ -11,7 +20,7 @@ set colorscheme twilight →establecer thema
       gruvbox
       darcula
       twilight
-       railscast
+      railscast
      bubblegum
    
      simple
@@ -43,7 +52,3 @@ tree → comando para listar terminal
 flecha izquierda → despliega carpeta
 flecha derecha  →  repliega carpeta
 tab → abre archivo
-
-Teclas 
- ctrl + f → buscar 
-
