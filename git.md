@@ -96,3 +96,8 @@ git rebase --abort
 ## 2) git rebase --abort
 git pull origin Rolando
 
+## comando para restaurar el remoto ye local cuando se cambia de usuario 
+
+git remote set-url origin https://Rolf-droid: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@github.com/InaconsSRL/inacons-backend.git
+git push origin Rama 
+

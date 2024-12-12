@@ -118,9 +118,18 @@ db.recursos.deleteMany({
     }	
 });
 
+## varios documentos por ids 
+
+db.compra_recursos.deleteMany({
+  _id: { $in: [
+    ObjectId('66e9c1212d6483a0944a0294'),
+    ObjectId('66eb5531bb03c148c366eb58')
+  ]}
+});
+
+
 ACTUALIZACIONES DE EN LA BASE DE DATOS 
 ---------------------------------------
-
 
  Si quieres renombrar el campo 'precio_actual ' a 'precio_actual' (sin espacio) y mantener su valor actual:
 
@@ -146,6 +155,33 @@ db.requerimiento.updateOne(
     }
  }
 )
+
+
+db.transferencia_recurso.updateOne(
+ { _id: ObjectId("6754666e7b5d28a87e343909") },
+ {
+    $set: { 
+      "cantidad": 9
+    }
+ }
+)
+
+
+
+
+otro ejemplo para actualizar por parametro 
+
+db.compra_recursos.updateOne(
+  { _id: ObjectId('66e9c0a82d6483a0944a0292') }, // Filtro para encontrar el documento
+  { $set: { recurso_id: ObjectId('6728e3bee29e4d45c4fb841f') } } // Actualización del campo recurso_id
+);
+
+
+db.cotizacion_proveedores_recurso.updateOne(
+  { _id: ObjectId('674a4a27e1950837a7639451') }, // Filtro para encontrar el documento
+  { $set: { cotizacion_proveedor_id : ObjectId('674a2c959a2f5e3d2d84ae94') } } // Actualización del campo recurso_id
+);
+
 
 
 
@@ -217,6 +253,17 @@ db.almacen_recursos.updateMany(
   ]
 );
 
+###Agregar un campo a una colección en MongoDB filtrada por el ID,
+      puedes usar el siguiente comando:
+                                        
+ db.cotizacion.updateOne(
+ { _id: ObjectId("bn") },
+ {
+    $set: {
+      solicitud_compra_id: ObjectId("673f6f78bb472dba5b51db04")
+    }
+ }
+ 
 ----------------------------------------------------------
 Listado de operadores relacionales
 $eq - equal - igual

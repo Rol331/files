@@ -51,3 +51,16 @@ Tmux permite dividir la pantalla en varias secciones o paneles. Aquí te explico
 - Para ver una lista de comandos disponibles en tmux, presiona Ctrl+b seguido de ?.
 - Puedes personalizar los atajos de teclado en tu archivo .tmux.conf.
 - Si necesitas ayuda con un comando específico, puedes escribirlo después de Ctrl+b : para ejecutarlo directamente.
+
+
+
+### Copiar y pegar
+
+. **tmux:**
+   - `tmux` es un multiplexor de terminal que permite dividir la terminal en múltiples sesiones y ventanas.
+   - Para seleccionar texto en `tmux`, primero debes entrar en el modo de copia:
+   - Presiona `Ctrl + b` y luego `[`.
+   - Si la tecla `Espacio` no funciona, intenta usar `Ctrl + Espacio` para iniciar la selección.  
+   - Usa las teclas de flecha para mover el cursor y seleccionar texto.
+   - Presiona `Enter` para copiar la selección al portapapeles de `tmux`.
+   - Puedes pegarlo dentro de `tmux` con `Ctrl + b` y luego `]`.

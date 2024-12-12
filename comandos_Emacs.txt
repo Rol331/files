@@ -267,6 +267,7 @@ COMANDOS PARA CUSTOMIZAR APARIENCIA
 M-x customize-themes
 Enlace de nord theme: https://www.nordtheme.com/ports/emacs
 
+
 PAQUETES
 
 load-theme → colocar el nombre del thema
