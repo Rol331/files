@@ -1,32 +1,5 @@
 sudo powermetrics --samplers smc | grep "CPU die temperature" --> saber la temperatura por terminal en macos 
 
-///////////// Apis ai ///////////
-
--------api google --------------------
-
-AIzaSyCUX5lEDI8iXAbacmXh_nx38iMvjBcjLXs --> key id google ia gemini
-https://aistudio.google.com/app/apikey  --> enlace de api ai google 
-
-
-AIzaSyADADMaCW9VR7MdsYXKf-0xFozUbCeT0DU  --> Key id gemini pro 
-
-------Api bito --------------------
-
-eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfODAzMF83MDkxMjlfNzkwODAyX1NhdCBOb3YgMDIgMTU6MTQ6MDEgVVRDIDIwMjQifQ.R1wlBLTxYtjv7BOgyHLSLxB39zE1MQobdhwuWLtYA10
-eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfODAzMF83MDkxMjlfNzkwODAyX1NhdCBOb3YgMDIgMTU6MTQ6MDEgVVRDIDIwMjQifQ.R1wlBLTxYtjv7BOgyHLSLxB39zE1MQobdhwuWLtYA10
-
---------api anthrop\C
-
-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 --> api (se necesita agregar credito)
-https://console.anthropic.com/settings/keys --> enlace 
-
--------api deppsek 
-
-sk-e5b80b32fcea457fb9426ee4ac2a3e31
-
-------api de open router 
-
-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
 
 ////////////////accesos hosting ecomoda /////////
 
@@ -57,7 +30,6 @@ Godaddy
 82094173
  a2evpR;lgX"X|y0Es+ 
 anderson7258@
-
 
 
 /////////////////proyecto webohook///////////
