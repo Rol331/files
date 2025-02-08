@@ -13,14 +13,16 @@ Sugerencias para ser más productivo con Kitty:
                                                                                                                                        
 1. Atajos de teclado útiles:                                                                                                           
 - Ctrl+Shift+T: Nueva pestaña                                                                                                          
-- Ctrl+Shift+Enter: Nueva ventana                                                                                                      
+- Ctrl+Shift+Enter: Nuevo split horizontal (pendiente configurar split verical)                                                                                                      
 - Ctrl+Shift+W: Cerrar ventana
 - Ctrl+Shift+Left/Right: Navegar entre pestañas
+- Ctrl+Shift+J: Duplicar pestaña 
 
 2. Configuraciones recomendadas:
 - Crear un archivo de configuración: ~/.config/kitty/kitty.conf
 - Personalizar fuentes y colores
 - Configurar atajos personalizados
+- abrir con un editor micro o emacs  
 
 3. Funcionalidades avanzadas:
 - Usar layouts predefinidos
@@ -106,6 +108,10 @@ launch tail -f app.log
 - Tomorrow Night
 - Material
 
+```
+  escribe el comando directamente en el terminal para listar los themas 
+kitty +kitten themes
+```
 6. Para volver al tema por defecto:
 ```bash
 kitty +kitten themes --reload-in=all Default

@@ -9,3 +9,9 @@ COMANDO PARA LISTAR PROYECTOS
 
 COMANDO PARA CREAR TOKEN ACCESO 
 -gh auth token --user Rol331
+
+
+ ##### COMANDOS CLI COPILOT ###### 
+
+
+gh copilot explain "explicame sudo apt-get"

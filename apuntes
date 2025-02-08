@@ -114,6 +114,9 @@ yasuyuki okamura love mesage   ラブメッセージ
 
 H02960635
 H02960635
+
+1040836
+67977321
 ----------------Comandos de red 2024------------------
 security find-generic-password -ga "UAP-INACONS" | grep "password:"--> ver contraseña wifi en macos
 nmcli device wifi show-password --> ver contraseña de wifi en ubuntu 24

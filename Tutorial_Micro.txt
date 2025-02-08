@@ -2,7 +2,7 @@ Teclas rapidas:
 
 ctrl+e → abrir ventana de comandos 
 ctrl+b → shell mode 
-ctrl+t →nueva pestaña 
+ctrl+t → nueva pestaña 
 ctrl+repag o ctrl+avpag → navegar entre pestañas
 alt+, o alt+. → navegar entre pestañas   
 alt+ { o alt+ } → avanzar entre parrafos arriba y abajo  

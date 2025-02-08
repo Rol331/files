@@ -33,6 +33,12 @@ db.liros.fid(nombrecampo:dato) → filtro de campos (similar al where)
 db.libros.find({precio : 50, cantidad : 20 })
 category_product
 
+db.recursos.find({ nombre: /varita/i}) --> Similar al like de sql 
+
+### Contar todas la collecciones
+
+    db.getCollectionNames().length
+
 ## Contar documentos 
 
 ## Para contar todos los documentos en una colección de MongoDB, puedes usar la siguiente consulta:
@@ -100,6 +106,7 @@ BORRAR DATOS DE UNA COLECCIÓN
 -----------------------
 use base1
 db.dropDatabase() ---> elimanr la base de datos
+
 db.collection.remove({}) --> borrar las documentos de una colleccion
 
 db.nombreColeccion.deleteMany({ estado: "inactivo" })  ---> eliminar dato  con parametro 
@@ -107,7 +114,6 @@ db.nombreColeccion.deleteMany({ estado: "inactivo" })  ---> eliminar dato  con p
 db.nombreColeccion.deleteOne({ nombre: "Juan" }) --> Elininar un solo documento que cumpla con el criterio (PENDIENTE PRUEBA) 
 
 db.recursos.updateMany({}, { $unset: { precio_actual: "" }); --> Eliminar un campo
-
 
 ## Consulta para eliminar documentos por rango de fecha 
 
@@ -253,6 +259,32 @@ db.almacen_recursos.updateMany(
   ]
 );
 
+db.obra_bodega_recursos.updateMany(
+  {}, // filtro vacío para actualizar todos los documentos
+  [
+    {
+      $set: {
+        recurso_id: { $toObjectId: "$recurso_id" },
+        obra_bodega_id: { $toObjectId: "$obra_bodega_id" }
+      }
+    }
+  ]
+);
+
+
+db.obra_bodega_recursos.updateMany(
+    {},
+    [
+        {
+            $set: {
+                obra_bodega_id: { $toObjectId: "$obra_bodega_id" },
+                recurso_id: { $toObjectId: "$recurso_id" }
+            }
+        }
+    ]
+);
+
+
 ###Agregar un campo a una colección en MongoDB filtrada por el ID,
       puedes usar el siguiente comando:
                                         
@@ -344,3 +376,4 @@ db.almacen_recursos.aggregate([
   { $project: { randomBodega: 0 } },
   { $merge: { into: "almacen_recursos", on: "_id", whenMatched: "merge", whenNotMatched: "discard" } }
 ]);
+
