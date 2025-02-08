@@ -1,0 +1,796 @@
+Token rol331 --> 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
+Token Rolf-droid --> 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
+
+MPqGnZEugJRD7imC
+MPqGnZEugJRD7imC
+
+#Cadema de coneccion
+DATABASE_URL=mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons?retryWrites=true&w=majority   
+
+#Comando para subir data 
+mongoimport --uri "mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons?retryWrites=true&w=majority" --collection recursos  --file /home
+/user/datos.json  --jsonArray
+
+mongoimport --uri "mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons?retryWrites=true&w=majority" --collection recursos  --file ./Recur.json  --jsonArray
+
+mongoimport --uri "mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons?retryWrites=true&w=majority" --collection obra_bodega_recursos  --file ./datos_convertidos.json  --jsonArray
+
+mongoimport --uri "mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons?retryWrites=true&w=majority" --collection obra_bodega_recursos  --file ./datos_exportados.json  --jsonArray
+
+#Comando para Backup 
+mongodump --uri "mongodb+sr//rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons" --out /home/usuario/backups/mongodb
+mongodump --uri "mongodb+srv://rramos:MPqGnZEugJRD7imC@cluster0.xinqt.mongodb.net/inacons" --out /home/inacons/rolf_files/inacons/proyecto/db/Noviembre
+
+mongosh "mongodb+srv://cluster0.xinqt.mongodb.net/" --apiVersion 1 --username rramos
+use 
+
+#DNS godady
+ns01.domaincontrol.com
+ns02.domaincontrol.com
+
+
+git push https://rol331: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@github.com/Rol331/jt.git main
+
+git push	 https://Rolf-droid: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@github.com/InaconsSRL/inacons-backend.git Rolando
+
+ssh wh52o55jo1zx@107.180.2.121
+
+rramos@inacons.com.pe
+
+
+           db.proveedor.aggregate([
+            {
+                $lookup: {com
+                    from: 'mediospagoproveedors',
+                    localField: '_id',
+                    foreignField: 'proveedor_id',
+                    as: 'mediosPago'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'contactoproveedors',
+                    localField: '_id',
+                    foreignField: 'proveedor_id',
+                    as: 'contactos'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$mediosPago',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $project: {
+                    id: '$_id',
+                    razon_social: 1,
+                    direccion: 1,
+                    nombre_comercial: 1,
+                    ruc: 1,
+                    rubro: 1,
+                    estado: 1,
+                    mediosPago: {
+                        cuenta_bcp: '$mediosPago.cuenta_bcp',
+                        cuenta_bbva: '$mediosPago.cuenta_bbva',
+                        yape: '$mediosPago.yape'
+                    },
+                    contactos: {
+                        $map: {
+                            input: '$contactos',
+                            as: 'contacto',
+                            in: {
+                                nombres: '$$contacto.nombres',
+                                apellidos: '$$contacto.apellidos',
+                                cargo: '$$contacto.cargo'
+                            }
+                        }
+                    }
+                }
+            }
+        ]);
+
+
+db. proveedor.aggregate([                                                                                                             
+            {                                                                                                                                          
+                $lookup: {                                                                                                                             
+                    from: 'medios_pago_proveedor',                                                                                                     
+                    localField: '_id',                                                                                                                 
+                    foreignField: 'proveedor_id',                                                                                                      
+                    as: 'medios_pago'                                                                                                                  
+                }                                                                                                                                      
+            },                                                                                                                                         
+            {                                                                                                                                          
+                $lookup: {                                                                                                                             
+                    from: 'contacto_proveedor',                                                                                                        
+                    localField: '_id',                                                                                                                 
+                    foreignField: 'proveedor_id',                                                                                                      
+                    as: 'contactos'                                                                                                                    
+                }                                                                                                                                      
+            },                                                                                                                                         
+            {                                                                                                                                          
+                $unwind: {                                                                                                                             
+                    path: '$medios_pago',                                                                                                              
+                    preserveNullAndEmptyArrays: true                                                                                                   
+                }                                                                                                                                      
+            }                                                                                                                                          
+        ]);  
+
+
+
+
+        db.proveedor.aggregate([
+            {
+                $lookup: {
+                    from: 'medios_pago_proveedor',
+                    localField: '_id',
+                    foreignField: 'proveedor_id',
+                    as: 'medios_pago'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'contacto_proveedor',
+                    localField: '_id',
+                    foreignField: 'proveedor_id',
+                    as: 'contactos'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$medios_pago',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+                $project: {
+                    id: '$_id',
+                    razon_social: 1,
+                    direccion: 1,
+                    nombre_comercial: 1,
+                    ruc: { $toString: '$ruc' }, // Convertir a String
+                    rubro: 1,
+                    estado: 1,
+                    mediosPago: {
+                        cuenta_bcp: '$medios_pago.cuenta_bcp',
+                        cuenta_bbva: '$medios_pago.cuenta_bbva',
+                        yape: '$medios_pago.yape'
+                    },
+                    contactos: {
+                        $map: {
+                            input: '$contactos',
+                            as: 'contacto',
+                            in: {
+                                nombres: '$$contacto.nombres',
+                                apellidos: '$$contacto.apellidos',
+                                cargo: '$$contacto.cargo'
+                            }
+                        }
+                    }
+                }
+            }
+        ]);
+
+
+
+      db.solicitud_compra.find({_id: ObjectId('6759acc3fb859925c850f233') }) 
+      db.cotizacion.find({solicitud_compra_id: ObjectId('6759acc3fb859925c850f233'})        
+	  db.cotizacion_proveedores.find({cotizacion_id: ObjectId('6759acfbfb859925c850f254')});
+      db.cotizacion_proveedores.find({cotizacion_id: ObjectId('6759afdbfb859925c850f3b0')});
+
+///////////// Apis ai ///////////
+
+
+-------api google --------------------
+
+AIzaSyCUX5lEDI8iXAbacmXh_nx38iMvjBcjLXs --> key id google ia gemini
+https://aistudio.google.com/app/apikey  --> enlace de api ai google 
+
+
+AIzaSyADADMaCW9VR7MdsYXKf-0xFozUbCeT0DU  --> Key id gemini pro 
+
+------Api bito --------------------
+
+eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfODAzMF83MDkxMjlfNzkwODAyX1NhdCBOb3YgMDIgMTU6MTQ6MDEgVVRDIDIwMjQifQ.R1wlBLTxYtjv7BOgyHLSLxB39zE1MQobdhwuWLtYA10
+eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfODAzMF83MDkxMjlfNzkwODAyX1NhdCBOb3YgMDIgMTU6MTQ6MDEgVVRDIDIwMjQifQ.R1wlBLTxYtjv7BOgyHLSLxB39zE1MQobdhwuWLtYA10
+
+--------api anthrop\C
+
+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 --> api (se necesita agregar credito)
+https://console.anthropic.com/settings/keys --> enlace 
+
+-------api deppsek 
+
+sk-e5b80b32fcea457fb9426ee4ac2a3e31
+
+------api de open router 
+
+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
+
+
+
+/////////// ----- Borrar ---   ////////
+
+
+/////////////////////////ulitmate /////////////////////////////
+
+
+db.requerimiento_recurso.aggregate([
+  {
+    $match: {
+      requerimiento_id: "676ddd6c768583f5e9c4e5df"
+    }
+  },
+  {
+    $lookup: {
+      from: 'recursos',
+      let: { recurso_id: { $toObjectId: "$recurso_id" } },
+      pipeline: [
+        { $match: { $expr: { $eq: ["$_id", "$$recurso_id"] } } }
+      ],
+      as: 'recurso'
+    }
+  },
+  {
+    $unwind: {
+      path: '$recurso',
+      preserveNullAndEmptyArrays: true
+    }
+  },
+  {
+    $lookup: {
+      from: 'unidads',
+      let: { unidad_id: { $toObjectId: "$recurso.unidad_id" } },
+      pipeline: [
+        { $match: { $expr: { $eq: ["$_id", "$$unidad_id"] } } }
+      ],
+      as: 'unidad'
+    }
+  },
+  {
+    $unwind: {
+      path: '$unidad',
+      preserveNullAndEmptyArrays: true
+    }
+  },
+  {
+    $lookup: {
+      from: 'obra_bodega_recursos',
+      let: { recurso_id: { $toObjectId: "$recurso_id" } },
+      pipeline: [
+        { $match: { $expr: { $eq: ["$recurso_id", "$$recurso_id"] } } },
+        {
+          $lookup: {
+            from: 'obras_bodega',
+            let: { obra_bodega_id: { $toObjectId: "$obra_bodega_id" } },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$_id", "$$obra_bodega_id"] } } }
+            ],
+            as: 'obra_bodega'
+          }
+        },
+        {
+          $unwind: {
+            path: '$obra_bodega',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            recurso_id: 1,
+            cantidad: 1,
+            obra_bodega_id: "$obra_bodega._id",
+            costo: {
+              $ifNull: ["$costo", 0]
+            },
+            nombre_obra_bodega: "$obra_bodega.nombre"
+          }
+        }
+      ],
+      as: 'listObraBodegaRecursos'
+    }
+  },
+  {
+    $addFields: {
+      total_bodegas: {
+        $sum: "$listObraBodegaRecursos.cantidad"
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      id: '$_id',
+      requerimiento_id: 1,
+      recurso_id: 1,
+      cantidad: 1,
+      cantidad_aprobada: 1,
+      costo_ref: '$recurso.precio_actual',
+      estado: 1,
+      notas: 1,
+      metrado: 1,
+      fecha_limit: 1,
+      nombre: '$recurso.nombre',
+      codigo: '$recurso.codigo',
+      unidad: '$unidad.nombre',
+      listObraBodegaRecursos: 1,
+      total_bodegas: 1
+    }
+  }
+]);
+
+
+
+////////////////////
+
+
+¡Claro! Estoy encantado de que haya funcionado. Vamos a desglosar la consulta paso a paso para que puedas entender cómo funciona y qué cambios se hicieron para solucionar el problema.
+
+### 1. `$match`
+```javascript
+{
+  $match: {
+    requerimiento_id: requerimiento_id
+  }
+}
+```
+- **Propósito**: Filtra los documentos en `RequerimientoRecurso` para que solo procesemos aquellos que tienen un `requerimiento_id` específico.
+- **Función**: Actúa como un filtro inicial para reducir el conjunto de datos con el que trabajamos.
+
+### 2. `$lookup` con `recursos`
+```javascript
+{
+  $lookup: {
+    from: 'recursos',
+    let: { recurso_id: { $toObjectId: "$recurso_id" } },
+    pipeline: [
+      { $match: { $expr: { $eq: ["$_id", "$$recurso_id"] } } }
+    ],
+    as: 'recurso'
+  }
+}
+```
+- **Propósito**: Realiza un join con la colección `recursos` para obtener detalles adicionales sobre el recurso.
+- **Función**: Usamos `$let` y `$expr` para realizar un join basado en IDs, asegurando que el `recurso_id` del documento actual coincida con el `_id` en `recursos`.
+
+### 3. `$unwind` de `recurso`
+```javascript
+{
+  $unwind: {
+    path: '$recurso',
+    preserveNullAndEmptyArrays: true
+  }
+}
+```
+- **Propósito**: Descompone el array `recurso` para trabajar con documentos individuales.
+- **Función**: Nos permite trabajar con los campos del recurso directamente en las etapas posteriores.
+
+### 4. `$lookup` con `unidads`
+```javascript
+{
+  $lookup: {
+    from: 'unidads',
+    let: { unidad_id: { $toObjectId: "$recurso.unidad_id" } },
+    pipeline: [
+      { $match: { $expr: { $eq: ["$_id", "$$unidad_id"] } } }
+    ],
+    as: 'unidad'
+  }
+}
+```
+- **Propósito**: Obtiene información sobre la unidad del recurso.
+- **Función**: Similar al primer `$lookup`, pero ahora para la colección `unidads`.
+
+### 5. `$unwind` de `unidad`
+```javascript
+{
+  $unwind: {
+    path: '$unidad',
+    preserveNullAndEmptyArrays: true
+  }
+}
+```
+- **Propósito**: Descompone el array `unidad` para un manejo más sencillo.
+- **Función**: Permite el acceso directo a los campos de unidad.
+
+### 6. `$lookup` con `obra_bodega_recursos` y `obras_bodega`
+```javascript
+{
+  $lookup: {
+    from: 'obra_bodega_recursos',
+    let: { recurso_id: { $toObjectId: "$recurso_id" } },
+    pipeline: [
+      { $match: { $expr: { $eq: ["$recurso_id", "$$recurso_id"] } } },
+      {
+        $lookup: {
+          from: 'obra_bodega',
+          localField: 'obra_bodega_id',
+          foreignField: '_id',
+          as: 'obra_bodega'
+        }
+      },
+      {
+        $unwind: {
+          path: '$obra_bodega',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          recurso_id: 1,
+          cantidad: 1,
+          obra_bodega_id: "$obra_bodega._id",
+          costo: {
+            $round: [{ $ifNull: ["$costo", 0] }, 2]
+          },
+          nombre_obra_bodega: "$obra_bodega.nombre"
+        }
+      }
+    ],
+    as: 'listObraBodegaRecursos'
+  }
+}
+```
+- **Propósito**: Realiza un join entre `obra_bodega_recursos` y `obras_bodega` para obtener información detallada sobre la bodega.
+- **Función**: Utiliza `localField` y `foreignField` para hacer un join directo basado en `obra_bodega_id`, lo que asegura que los datos de `obras_bodega` se unan correctamente.
+
+### 7. `$addFields` para `total_bodegas`
+```javascript
+{
+  $addFields: {
+    total_bodegas: {
+      $sum: "$listObraBodegaRecursos.cantidad"
+    }
+  }
+}
+```
+- **Propósito**: Calcula el total de `cantidad` de todos los recursos en las bodegas.
+- **Función**: Usa `$sum` para sumar las cantidades en el array `listObraBodegaRecursos`.
+
+### 8. `$project` final
+```javascript
+{
+  $project: {
+    _id: 1,
+    id: '$_id',
+    requerimiento_id: 1,
+    recurso_id: 1,
+    cantidad: 1,
+    cantidad_aprobada: 1,
+    costo_ref: '$recurso.precio_actual',
+    estado: 1,
+    notas: 1,
+    metrado: 1,
+    fecha_limit: 1,
+    nombre: '$recurso.nombre',
+    codigo: '$recurso.codigo',
+    unidad: '$unidad.nombre',
+    listObraBodegaRecursos: {
+      $map: {
+        input: "$listObraBodegaRecursos",
+        as: "item",
+        in: {
+          _id: "$$item._id",
+          recurso_id: "$$item.recurso_id",
+          cantidad: "$$item.cantidad",
+          costo: "$$item.costo",
+          obra_bodega_id: "$$item.obra_bodega_id",
+          nombre_obra_bodega: "$$item.nombre_obra_bodega"
+        }
+      }
+    },
+    total_bodegas: 1
+  }
+}
+```
+- **Propósito**: Define qué campos se incluirán en el resultado final.
+- **Función**: Usa `$map` para transformar `listObraBodegaRecursos` y asegurar que `obra_bodega_id` y `nombre_obra_bodega` sean parte del resultado.
+
+### Solución:
+El problema inicial era que los campos `obra_bodega_id` y `nombre_obra_bodega` no se estaban uniendo correctamente debido a un error en la forma en que se realizaban los joins. Al cambiar el uso de `$lookup` para utilizar `localField` y `foreignField`, aseguramos que los joins se realizaran correctamente, permitiendo que los campos deseados se incluyan en el resultado final.
+
+Espero que esta explicación te haya ayudado a entender mejor cómo funciona la consulta y cómo se resolvió el problema. Si tienes más preguntas, ¡no dudes en preguntar!
+
+
+
+
+db.solicitud_almacen.find()                                                                              
+[                                                                                                                                                      
+  {                                                                                                                                                    
+    _id: ObjectId('6748b4ce708d0c73de05f017'),                                                                                                         
+    usuario_id: ObjectId('66f076c4f8101a31e3cc8903'),                                                                                                  
+    requerimiento_id: ObjectId('673e23aeee3c17d939e6d043'),                                                                                            
+    obra_origen_id: ObjectId('673391c2f4a0617984dbd9f9'),                                                                                           
+    obra_destino_id: ObjectId('67339234f4a0617984dbda00'),                                                                                          
+    fecha: ISODate('2024-11-28T18:22:06.929Z'),                                                                                                        
+    __v: 0                                                                                                                                             
+  },                                                    
+
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$444
+
+
+const { ObjectId } = require('mongoose').Types;
+const transferenciaDetallesConReferencias = async (referenciaId) => {
+  try {
+    const data = await TransferenciaDetalle.aggregate([
+      {
+        $match: { referencia_id: referenciaId }
+      },
+      {
+        $lookup: {
+          from: 'transferencias', // La colección que contiene los documentos de Transferencia
+          localField: 'transferencia_id',
+          foreignField: '_id',
+          as: 'transferencia'
+        }
+      },
+      {
+        $unwind: '$transferencia'
+      },
+      {
+        $lookup: {
+          from: 'usuarios', // La colección que contiene los documentos de Usuario
+          localField: 'transferencia.usuario_id',
+          foreignField: '_id',
+          as: 'usuario'
+        }
+      },
+      {
+        $unwind: '$usuario'
+      },
+      {
+        $lookup: {
+          from: 'movimientos', // La colección que contiene los documentos de Movimiento
+          localField: 'transferencia.movimiento_id',
+          foreignField: '_id',
+          as: 'movimiento'
+        }
+      },
+      {
+        $unwind: '$movimiento'
+      },
+      {
+        $lookup: {
+          from: 'movilidades', // La colección que contiene los documentos de Movilidad
+          localField: 'transferencia.movilidad_id',
+          foreignField: '_id',
+          as: 'movilidad'
+        }
+      },
+      {
+        $unwind: '$movilidad'
+      },
+      {
+        $lookup: {
+          from: 'solicitud_almacen', // La colección que contiene los documentos de Solicitud Almacen
+          localField: 'referencia_id',
+          foreignField: '_id',
+          as: 'solicitud'
+        }
+      },
+      {
+        $unwind: '$solicitud'
+      },
+      {
+        $project: {
+          transferencia_id: 1,
+          referencia_id: 1,
+          fecha: 1,
+          tipo: 1,
+          referencia: 1,
+          'usuario._id': 1,
+          'usuario.nombres': 1,
+          'usuario.apellidos': 1,
+          'movimiento._id': 1,
+          'movimiento.nombre': 1,
+          'movimiento.descripcion': 1,
+          'movimiento.tipo': 1,
+          'movilidad._id': 1,
+          'movilidad.denominacion': 1,
+          'movilidad.descripcion': 1,
+          'solicitud.obra_origen_id': 1,
+          'solicitud.obra_destino_id': 1
+        }
+      }
+    ]);
+
+    return data;
+  } catch (error) {
+    console.error('Error al obtener detalles de transferencia con referencias:', error);
+    throw new Error('Error al obtener detalles de transferencia');
+  }
+};
+
+// Uso de la función
+transferenciaDetallesConReferencias('tu_referencia_id_aqui')
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+
+const listTransferenciaDetalles = async () => {
+  try {
+    const data = await TransferenciaDetalle.aggregate([
+      {
+        $lookup: {
+          from: 'transferencias',
+          localField: 'transferencia_id',
+          foreignField: '_id',
+          as: 'transferencia'
+        }
+      },
+      { $unwind: '$transferencia' },
+      // Add additional $lookup stages here as needed
+      {
+        $project: {
+          transferencia_id: 1,
+          referencia_id: 1,
+          fecha: 1,
+          tipo: 1,
+          referencia: 1,
+          'transferencia.usuario_id': 1,
+          'transferencia.movimiento_id': 1,
+          'transferencia.movilidad_id': 1,
+          // Include other fields as needed
+        }
+      }
+    ]);
+
+    return data;
+  } catch (error) {
+    console.error('Error listing transferencia detalles:', error);
+    throw new Error('Error listing transferencia detalles');
+  }
+};
+```
+
+### 2. Add a New `TransferenciaDetalle`
+
+After adding a new document, use the `aggregate` method to return the populated result:
+
+```javascript
+const addTransferenciaDetalle = async (args) => {
+  const newTransferenciaDetalle = new TransferenciaDetalle(args);
+
+  try {
+    const savedTransferenciaDetalle = await newTransferenciaDetalle.save();
+    const data = await TransferenciaDetalle.aggregate([
+      { $match: { _id: savedTransferenciaDetalle._id } },
+      {
+        $lookup: {
+          from: 'transferencias',
+          localField: 'transferencia_id',
+          foreignField: '_id',
+          as: 'transferencia'
+        }
+      },
+      { $unwind: '$transferencia' },
+      // Add additional $lookup stages here as needed
+    ]);
+
+    return data[0];
+  } catch (error) {
+    console.error('Error adding transferencia detalle:', error);
+    throw new Error('Error adding transferencia detalle');
+  }
+};
+```
+
+### 3. Update a `TransferenciaDetalle`
+
+After updating, use the `aggregate` method to return the populated document:
+
+```javascript
+const updateTransferenciaDetalle = async (id, args) => {
+  try {
+    await TransferenciaDetalle.findByIdAndUpdate(id, args, { new: true });
+
+    const data = await TransferenciaDetalle.aggregate([
+      { $match: { _id: new Types.ObjectId(id) } },
+      {
+        $lookup: {
+          from: 'transferencias',
+          localField: 'transferencia_id',
+          foreignField: '_id',
+          as: 'transferencia'
+        }
+      },
+      { $unwind: '$transferencia' },
+      // Add additional $lookup stages here as needed
+    ]);
+
+    if (!data || data.length === 0) {
+      throw new Error('Transferencia detalle not found');
+    }
+
+    return data[0];
+  } catch (error) {
+    console.error('Error updating transferencia detalle:', error);
+    throw new Error('Error updating transferencia detalle');
+  }
+};
+```
+
+### 4. Delete a `TransferenciaDetalle`
+
+For deletion, you typically don't need to populate related fields, but you might want to return the deleted document's details before deletion:
+
+```javascript
+const deleteTransferenciaDetalle = async (id) => {
+  try {
+    const data = await TransferenciaDetalle.aggregate([
+      { $match: { _id: new Types.ObjectId(id) } },
+      {
+        $lookup: {
+          from: 'transferencias',
+          localField: 'transferencia_id',
+          foreignField: '_id',
+          as: 'transferencia'
+        }
+      },
+      { $unwind: '$transferencia' },
+      // Add additional $lookup stages here as needed
+    ]);
+
+    if (!data || data.length === 0) {
+      throw new Error('Transferencia detalle not found');
+    }
+
+    await TransferenciaDetalle.findByIdAndDelete(id);
+    return data[0];
+  } catch (error) {
+    console.error('Error deleting transferencia detalle:', error);
+    throw new Error('Error deleting transferencia detalle');
+  }
+};
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dkfldkemsl
+
+
+
+
+
+
+
+
+
+Curso:
+Uso Terminal Unix / Linux
+Objetivo:
+Mejorar la productividad en el desarrollo de actividades (conección de servidor,instalacion de programas  ) 
+Dia a escoger:
+Sábado 15/02 (entre Martes, Jueves o Sábado)
+Horario:
+1:30pm - 3:30 (preferible por las tardes
+
+
+
+
+
+
